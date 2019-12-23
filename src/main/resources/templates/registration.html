@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Rejestracja</title>
+    <div th:replace="shared/header :: header-css"/>
 </head>
 <body>
 
@@ -21,33 +23,39 @@
                     </div>
 
                     <div class="form-group">
+                        Login:
                         <input type="text" th:field="*{login}"
-                               class="form-control" placeholder="nazwa użytkownika" required="true" autofocus="true"/>
+                               class="form-control" placeholder="" required="true" autofocus="true"/>
                     </div>
 
                     <div class="form-group">
+                        Imię:
                         <input type="text" th:field="*{firstName}"
-                               class="form-control" placeholder="Imię" required="true" autofocus="true"/>
+                               class="form-control" placeholder="" required="true" autofocus="true"/>
                     </div>
 
                     <div class="form-group">
+                        Nazwisko:
                         <input type="text" th:field="*{lastName}"
-                               class="form-control" placeholder="Nazwisko" required="true" autofocus="true"/>
+                               class="form-control" placeholder="" required="true" autofocus="true"/>
                     </div>
 
 
                     <div class="form-group">
+                        Email:
                         <input type="text" th:field="*{email}"
-                               class="form-control" placeholder="email" required="true" autofocus="true"/>
+                               class="form-control" placeholder="" required="true" autofocus="true"/>
                     </div>
                     <div class="form-group">
+                        Numer telefonu:
                         <input type="text" th:field="*{phoneNumber}"
-                               class="form-control" placeholder="numer telefonu" required="true" autofocus="true"/>
+                               class="form-control" placeholder="" required="true" autofocus="true"/>
                     </div>
 
                     <div class="form-group">
+                        Hasło:
                         <input type="password" th:field="*{password}"
-                               class="form-control" placeholder="hasło" required="true" autofocus="true"/>
+                               class="form-control" placeholder="" required="true" autofocus="true"/>
                     </div>
 
                     <div class="row">
@@ -65,5 +73,6 @@
     </div>
 
 </div>
+<div th:replace="shared/footer :: footer"></div>
 </body>
 </html>

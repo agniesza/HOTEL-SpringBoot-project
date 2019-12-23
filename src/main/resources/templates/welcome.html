@@ -3,24 +3,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
-</head>
+</head>t_authority
 <body>
 
     <div th:replace="shared/header :: header('welcome')"/>
-    <div id="main">
-        To moja strona domowa
 
-    <th:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-        </form>
-
-        <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
-    </th:if>
-    </div>
 
 
 </body>
