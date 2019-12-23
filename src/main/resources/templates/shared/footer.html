@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
+<body>
+<div id="footer" th:fragment="footer">
+    <footer class="container-fluid text-center">
+        © 2019 Hotel <span style="font-family: 'Inria Serif', serif"> woods</span>
+    </footer>
+</div>
+<div th:replace="shared/footer :: footer"></div>
 </body>
 </html>
