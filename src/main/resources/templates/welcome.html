@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Create an account</title>
+</head>
+<body>
+<div class="container">
+    <th:if test="${pageContext.request.userPrincipal.name != null}">
+        <form id="logoutForm" method="POST" action="/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+
+        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+    </th:if>
+</div>
+</body>
+</html>
