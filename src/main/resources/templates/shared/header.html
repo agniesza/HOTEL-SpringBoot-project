@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <div th:fragment="header-css">
+    </div>
 </head>
+
 <body>
 
+<body class="card-header">
+
+<nav id="header" th:fragment="header(pageName)" class="navbar navbar-expand bg-dark flex-column flex-md-row">
+    <div class="navbar-nav-scroll">
+        <ul class="nav nav-tabs bg-dark">
+
+            <li class="nav-item">
+                <a class="nav-link" th:classappend="${pageName eq 'welcome'}?'active'" th:href="@{/}" >Strona główna</a>
+            </li>
+
+            <li class="nav-item" sec:authorize="isAnonymous()">
+                <a class="nav-link"  th:classappend="${pageName eq 'registration'}?'active'" href="/registration">Rejestracja</a>
+            </li>
+        </ul>
+    </div>
+
+    <ul class="nav-tabs navbar-nav ml-md-auto bg-dark">
+
+        <label style="color:yellow; margin-top: 20px;" sec:authorize="isAuthenticated()">
+            Witaj <span sec:authentication="name"/>!
+        </label>
+
+        <li class="nav-item" sec:authorize="isAuthenticated()">
+            <a class="nav-link" href="#" onclick="document.getElementById('logout').submit()">Wyloguj się</a>
+            <form th:action="@{/logout}" id="logout" method="post" style="display: none;">
+
+            </form>
+        </li>
+
+        <li sec:authorize="isAnonymous()"
+            class="nav-item"
+            th:class="${pageName eq 'logonForm'}? 'active'">
+            <a class="nav-link" th:classappend="${pageName eq 'login'}?'active'" th:href="@{/login}">Zaloguj się</a>
+        </li>
+    </ul>
+
+</nav>
+
+
+
+
 </body>
+</body>
+
+
 </html>
