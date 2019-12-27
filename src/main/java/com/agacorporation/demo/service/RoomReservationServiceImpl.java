@@ -48,9 +48,12 @@ public class RoomReservationServiceImpl implements RoomReservationService {
 
     @Override
     public RoomReservation getRoomReservations(Long id) {
-        Optional<RoomReservation> optionalRoomReservation = roomReservationRepository.findById(id);
+       Optional<RoomReservation> optionalRoomReservation = roomReservationRepository.findById(id);
         RoomReservation roomReservation = optionalRoomReservation.orElseThrow(()->new RoomReservationNotFoundException(id));
         return roomReservation;
+
+
+
     }
 
     @Override
@@ -61,10 +64,15 @@ public class RoomReservationServiceImpl implements RoomReservationService {
             throw new RoomReservationNotFoundException(id);
         }
 
+
+
     }
 
     @Override
     public void saveRoomReservation(RoomReservation roomReservation) {
             roomReservationRepository.save(roomReservation);
     }
+
+
+
 }
