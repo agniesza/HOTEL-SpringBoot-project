@@ -70,6 +70,9 @@
                 <li>  <a class="nav-link" th:classappend="${pageName eq 'welcome'}?'active'" th:href="@{/}" >Strona główna</a></li>
                 <li sec:authorize="isAnonymous()" ><a class="nav-link"  th:classappend="${pageName eq 'registration'}?'active'" href="/registration">Rejestracja</a></li>
                 <li><a href="#">Contact</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:classappend="${pageName eq 'reservationList'}?'active'" th:href="@{/reservationList.html(all)}">Lista rezerwacji</a>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -86,6 +89,8 @@
         </div>
     </div>
 </nav>
+
+
 <!--
 <body class="card-header">
 
