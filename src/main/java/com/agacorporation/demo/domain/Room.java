@@ -5,15 +5,14 @@ import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "t_room")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "max_number_of_people", nullable = false)
     private int maxNumberOfPeople;

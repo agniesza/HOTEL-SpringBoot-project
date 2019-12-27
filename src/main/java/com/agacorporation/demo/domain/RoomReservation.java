@@ -2,7 +2,6 @@ package com.agacorporation.demo.domain;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Past;
 import java.util.Date;
 
 public class RoomReservation {
@@ -12,12 +11,12 @@ public class RoomReservation {
     private Long id;
 
     @Valid
-    @ManyToOne(fetch = FetchType.EAGER)//EAGER powoduje pobranie obiektu roomtype wraz z obiektem room.
+    @ManyToOne(fetch = FetchType.EAGER)//
     @JoinColumn(name="room_id", nullable = false)
     private Room room;
 
     @Valid
-    @ManyToOne(fetch = FetchType.EAGER)//EAGER powoduje pobranie obiektu roomtype wraz z obiektem room.
+    @ManyToOne(fetch = FetchType.EAGER)//
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 

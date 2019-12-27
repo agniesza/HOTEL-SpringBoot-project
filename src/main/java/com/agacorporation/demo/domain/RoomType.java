@@ -2,13 +2,14 @@ package com.agacorporation.demo.domain;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "t_room_type")
-public class RoomType {
+public class RoomType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name="name",nullable = false)
     private String roomTypeName;
