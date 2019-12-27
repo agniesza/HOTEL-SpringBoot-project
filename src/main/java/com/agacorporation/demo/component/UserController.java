@@ -4,6 +4,7 @@ import com.agacorporation.demo.domain.User;
 import com.agacorporation.demo.service.SecurityService;
 import com.agacorporation.demo.service.UserService;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Component
+@Controller
 @RequestMapping
 public class UserController {
 
@@ -37,14 +38,19 @@ public class UserController {
         return "redirect:/welcome.html";
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public String login(Model model, String error, String logout) {
         if (error != null)
             model.addAttribute("error", "Your username and password is invalid.");
 
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
-      //  return "redirect:/welcome.html";
+       return "welcome.html";
+      //  return "login.html";
+    }
+    @GetMapping("/login")
+    public String login() {
+         //  return "redirect:/welcome.html";
         return "login.html";
     }
 
