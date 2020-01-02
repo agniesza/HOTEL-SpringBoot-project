@@ -21,8 +21,104 @@
         </div>
         <div class="col-sm-8 text-left">
 
+            <form th:method="POST" th:action="@{reservationList.html}">
+                <div class="row">
+                  <!--
+                  wyszukiwarka
+                  -->
+                </div>
+            </form>
+            <div th:if="${roomReservationListPage.hasContent() eq false}">
+                <span>Brak pojazdów w bazie</span>
+                   </div>
+            <div th:if="${roomReservationListPage.hasContent() eq true}">
+                <span>  Rezerwacji: [[${roomReservationListPage.totalElements}]] </span>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Numer pokoju</th>
+                    <th>Rezerwujący</th>
+                    <th>Początek rezerwacji</th>
+
+                    <th>Koniec rezerwacji</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Liczba osób</th>
+                    <th>Cena </th>
+                    <th>Czy opłacono?</th>
+                    <th>Czy zweryfikowano?</th>
+                    <th sec:authorize="hasRole('ADMIN')">Opcje</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="roomReservation : ${roomReservationListPage.content}">
+
+                    <td>
+                      <!--  <a sec:authorize="isAuthenticated()" th:href="@{/reservationList.html(id=${roomReservation.id})}">[[${roomReservation.room.roomNumber}]]</a> -->
+                        <span > [[${roomReservation.room.roomNumber}]]</span>
+
+                    </td>
+                    <td>
+                        <span > [[${roomReservation.user.firstName}]]</span>
+                        <span > [[${roomReservation.user.lastName}]]</span>
+                    </td>
+                    <td>
+                        <span th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span>
+
+                    </td>
+                    <td>
+                        <span th:text="${#dates.format(roomReservation.checkInDate, 'dd-MM-yyyy')}"></span>
+
+                    </td>
+                    <td>
+                        <span th:text="${#dates.format(roomReservation.checkOutDate, 'dd-MM-yyyy')}"></span>
+
+                    </td>
+                    <td>
+                        <span > [[${roomReservation.numberOfPeople}]]</span>
+                    </td>
+                    <td>
+                        <span > [[${roomReservation.endPrice}]]</span>
+                    </td>
+                    <td>
+                        <div th:if="${roomReservation.paid eq true}">
+                        <span > Tak</span>
+                        </div>
+                        <div th:if="${roomReservation.paid eq false}">
+                            <span >Nie</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div th:if="${roomReservation.verified eq true}">
+                            <span > Tak</span>
+                        </div>
+                        <div th:if="${roomReservation.verified eq false}">
+                            <span >Nie</span>
+                        </div>
+                    </td>
+
+                    <td>
+                        <a class="btn btn-danger">Usuń</a>
+                        <a class="btn btn-success">Edytuj</a>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+            </table>
 
 
+
+
+
+          <!--  <div th:replace="shared/pagination :: pager(reservationList.html, ${roomReservationListPage})"></div> -->
 
         </div>
         <div class="col-sm-2 sidenav">

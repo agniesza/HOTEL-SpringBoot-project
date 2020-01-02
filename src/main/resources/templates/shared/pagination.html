@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+
+<body>
+
+<div th:fragment="pager(mainUrl, page)"
+     th:with="
+         firstPageUrl=${mainUrl}+'?page=0&size='+${page.size},
+         prevPageUrl=${mainUrl}+'?page='+${page.number - 1}+'&size='+${page.size},
+         nextPageUrl=${mainUrl}+'?page='+${page.number + 1}+'&size='+${page.size},
+         lastPageUrl=${mainUrl}+'?page='+${page.totalPages - 1}+'&size='+${page.size}
+    "
+>
+
+    <nav>
+        <ul class="pagination pagination-sm" style="float: left">
+
+            <li class="page-item" th:classappend="${page.first}?'disabled'">
+                <a class="page-link" th:href="${page.first?'#':firstPageUrl}">
+                    <span>Pierwsza</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:classappend="${page.first}?'disabled'">
+                <a class="page-link" th:href="${page.first?'#':firstPageUrl}">
+                     <span>&laquo;</span>
+                </a>
+            </li>
+
+            <li th:each="pageIdx : ${#numbers.sequence( 0, page.totalPages-1)}" class="page-item" th:classappend="${pageIdx eq page.number}?'active'"
+                th:with="pageUrl=${mainUrl}+'?page='+${pageIdx}+'&size='+${page.size}"
+            >
+                     <a class="page-link" th:href="${pageUrl}">[[${pageIdx+1}]]</a>
+            </li>
+
+            <li class="page-item" th:classappend="${page.last}?'disabled'">
+                <a class="page-link" th:href="${page.last?'#':nextPageUrl}">
+                    <span>&raquo;</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:classappend="${page.last}?'disabled'">
+                <a class="page-link" th:href="${page.last?'#':lastPageUrl}">
+                    <span>Ostatnia</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <ul class="pagination" style="float: right" th:with="pageSizes = ${ {1, 2, 3, 4, 20} }">
+            <li class="page-item" th:each="size : ${pageSizes}" th:classappend="${page.size == size}?'active'"
+                th:with="pageUrl=${mainUrl}+'?page=0&size='+${size}"
+            >
+
+                <a class="page-link" th:href="${pageUrl}">
+                    <span>[[${size}]]</span>
+                </a>
+
+            </li>
+        </ul>
+    </nav>
+
+
+</div>
+
+</body>
+</html>

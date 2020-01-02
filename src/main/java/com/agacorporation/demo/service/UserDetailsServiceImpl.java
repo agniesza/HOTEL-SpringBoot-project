@@ -3,6 +3,7 @@ package com.agacorporation.demo.service;
 import com.agacorporation.demo.domain.Authority;
 import com.agacorporation.demo.domain.User;
 import com.agacorporation.demo.repository.UserRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,4 +36,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         return new org.springframework.security.core.userdetails.User(user.getLogin(),user.getPassword(),grantedAuthorities);
     }
+
+
 }
