@@ -23,14 +23,24 @@ public class ReservationFormController {
     }
 
     @RequestMapping(value="/reservationForm.html", method= RequestMethod.GET)
-    public String showForm(Model model, Optional<Long> id){
+    public String showFormUSR(Model model, Optional<Long> id){
 
         model.addAttribute("roomReservation",
                 id.isPresent()?
                         roomReservationService.getRoomReservations(id.get()):
                         new RoomReservation());
 
-        return "reservationForm";
+        return "reservationFormUSR";
     }
 
+    @RequestMapping(value="/reservationForm.html", method= RequestMethod.GET)
+    public String showFormADM(Model model, Optional<Long> id){
+
+        model.addAttribute("roomReservation",
+                id.isPresent()?
+                        roomReservationService.getRoomReservations(id.get()):
+                        new RoomReservation());
+
+        return "reservationFormUSR";
+    }
 }
