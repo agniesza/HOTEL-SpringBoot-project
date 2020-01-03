@@ -22,7 +22,7 @@ public class ReservationFormController {
         this.roomReservationService = roomReservationService;
     }
 
-    @RequestMapping(value="/reservationForm.html", method= RequestMethod.GET)
+    @RequestMapping(value="/reservationFormUSR.html", method= RequestMethod.GET)
     public String showFormUSR(Model model, Optional<Long> id){
 
         model.addAttribute("roomReservation",
@@ -33,7 +33,7 @@ public class ReservationFormController {
         return "reservationFormUSR";
     }
 
-    @RequestMapping(value="/reservationForm.html", method= RequestMethod.GET)
+    @RequestMapping(value="/reservationFormADM.html", method= RequestMethod.GET)
     public String showFormADM(Model model, Optional<Long> id){
 
         model.addAttribute("roomReservation",

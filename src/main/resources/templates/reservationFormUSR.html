@@ -20,7 +20,89 @@
         </div>
         <div class="col-sm-8 text-left">
 
+            <form th:method="POST" th:object="${roomReservation}" th:action="@{/reservationFormUSR.html}">
+                <fieldset>
 
+
+                    <div class="form-group">
+                        <label for="name" class="bmd-label-floating"></label>
+                        <input id="name" type="text" name="name" th:value="*{name}"
+                               class="form-control" th:classappend="${#fields.hasErrors('name')}?'is-invalid'"
+                               required="true" autofocus="true"/>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('name')}">
+                            <span th:each="err : ${#fields.errors('name')}" th:text="${err}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="model" class="bmd-label-floating">Nazwa:</label>
+                        <input id="model" type="text" th:field="*{model}"
+                               class="form-control" th:classappend="${#fields.hasErrors('model')}?'is-invalid'"
+                               required="true"/>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('model')}">
+                            <p th:each="err : ${#fields.errors('model')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price" class="bmd-label-floating">Cena:</label>
+                        <input id="price" type="text" th:field="*{price}"
+                               class="form-control" th:classappend="${#fields.hasErrors('price')}?'is-invalid'"
+                               required="true"/>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('price')}">
+                            <p th:each="err : ${#fields.errors('price')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productionDate" class="bmd-label-floating">Data produkcji:</label>
+                        <input id="productionDate" type="date" th:field="*{productionDate}"
+                               class="form-control" th:classappend="${#fields.hasErrors('productionDate')}?'is-invalid'"
+                               required="true"/>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('productionDate')}">
+                            <p th:each="err : ${#fields.errors('productionDate')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="bmd-label-floating">
+                            <input type="checkbox" th:field="*{exclusive}"/>
+                            Ekskluzywny?
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <select th:field="*{vehicleType.id}" class="form-control"
+                                th:classappend="${#fields.hasErrors('vehicleType.id')}?'is-invalid'">
+                            <option value="-1">--wybierz typ pojazdu--</option>
+                            <option th:each="type : ${vehicleTypes}"
+                                    th:value="${type.id}"
+                                    th:text=" ${type.name}"
+                            />
+                        </select>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('vehicleType.id')}">
+                            <p th:each="err : ${#fields.errors('vehicleType.id')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div th:each="acc : ${accessoryList}" class='checkbox' style="left:25px;">
+                            <input th:id="${acc}" type="checkbox" th:field="*{accessories}"
+                                   th:value="${acc.id}"/>
+                            <label th:text="${acc.name}" th:for="${acc}"></label>
+                        </div>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('accessories')}">
+                            <p th:each="err : ${#fields.errors('accessories')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary btn-raised">Zapisz</button>
+                </fieldset>
+            </form>
 
 
         </div>
