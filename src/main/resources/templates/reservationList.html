@@ -5,7 +5,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
 </head>
@@ -33,7 +32,7 @@
                    </div>
             <div th:if="${roomReservationListPage.hasContent() eq true}">
                 <span>  Rezerwacji: [[${roomReservationListPage.totalElements}]] </span>
-            </div>
+
 
             <table class="table table-striped">
                 <thead>
@@ -118,8 +117,7 @@
 
 
 
-          <!--  <div th:replace="shared/pagination :: pager(reservationList.html, ${roomReservationListPage})"></div> -->
-
+             </div>
         </div>
         <div class="col-sm-2 sidenav">
             <div class="well">
@@ -127,9 +125,7 @@
                     Witaj <span sec:authentication="name"/>!
                 </label>
             </div>
-            <div class="well">
-                <p>ADS</p>
-            </div>
+
         </div>
     </div>
 </div>

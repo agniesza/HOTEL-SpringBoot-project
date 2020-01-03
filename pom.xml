@@ -79,7 +79,12 @@
             <artifactId>bootstrap</artifactId>
             <version>3.4.1</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.webjars.npm/bootstrap-material-design -->
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>bootstrap-material-design</artifactId>
+            <version>4.1.2</version>
+        </dependency>
 
     </dependencies>
 

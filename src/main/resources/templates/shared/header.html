@@ -4,86 +4,43 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <div th:fragment="header-css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css"
-              href="statics/css/main.css" />
+
+        <link href="welcome">
+        <link href="welcome">
         <link href="https://fonts.googleapis.com/css?family=Inria+Serif&display=swap" rel="stylesheet">
-        <style>
-            /* Remove the navbar's default margin-bottom and rounded borders */
-            .navbar {
-                margin-bottom: 0;
-                border-radius: 0;
-                position: relative;
-                display: block;
-            }
-            .navbar>li {
-                position: relative;
-                display: block;
-            }
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
 
-            /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-            .row.content {height: 450px}
 
-            /* Set gray background color and 100% height */
-            .sidenav {
-                padding-top: 20px;
-                background-color: #f1f1f1;
-                height: 100%;
-            }
-
-            /* Set black background color, white text and some padding */
-            footer {
-                background-color: #555;
-                color: white;
-                padding: 15px;
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-            }
-
-            /* On small screens, set height to 'auto' for sidenav and grid */
-            @media screen and (max-width: 767px) {
-                .sidenav {
-                    height: auto;
-                    padding: 15px;
-                }
-                .row.content {height:auto;}
-            }
-        </style>
     </div>
 </head>
 
 <body>
 
-<nav th:fragment="header(pageName)" class="navbar navbar-inverse">
-    <div class="container-fluid" style="display: inline">
-        <div class="navbar-header" style="display: inline" >
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
+<nav th:fragment="header(pageName)" id="header" class="navbar navbar-expand bg-dark flex-column flex-md-row">
+    <div class="navbar-nav-scroll">
 
-            </button>
-            <a class="navbar-brand" href="#" style="font-family: 'Inria Serif', serif">woods</a>
 
-            <ul class="nav navbar-nav">
-                <li>  <a class="nav-link" th:classappend="${pageName eq 'welcome'}?'active'" th:href="@{/}" >Strona główna</a></li>
-                <li sec:authorize="isAnonymous()" ><a class="nav-link"  th:classappend="${pageName eq 'registration'}?'active'" href="/registration">Rejestracja</a></li>
-                <li><a href="#">Contact</a></li>
-                <li sec:authorize="isAuthenticated()" ><a class="nav-link"  th:classappend="${pageName eq 'reservationList'}?'active'" href="/reservationList">Rezerwacje</a></li>
+            <ul class="nav nav-tabs bg-dark">
+                <li class="nav-item"><a class="nav-link" href="#" style="font-family: 'Inria Serif', serif">woods</a></li>
+                <li class="nav-item">  <a class="nav-link" th:classappend="${pageName eq 'welcome'}?'active'" th:href="@{/}" >Strona główna</a></li>
+                <li class="nav-item" sec:authorize="isAnonymous()" ><a class="nav-link"  th:classappend="${pageName eq 'registration'}?'active'" href="/registration">Rejestracja</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                <li class="nav-item" sec:authorize="isAuthenticated()" ><a class="nav-link"  th:classappend="${pageName eq 'reservationList'}?'active'" href="/reservationList">Rezerwacje</a></li>
 
-            </ul>
+            </ul>        </div>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li sec:authorize="isAnonymous()" ><a class="nav-link"  th:classappend="${pageName eq 'login'}?'active'" href="/login"><span class="glyphicon glyphicon-log-in"></a></li>
+            <ul class="nav-tabs navbar-nav ml-md-auto bg-dark">
+                <li class="nav-item" sec:authorize="isAnonymous()" ><a class="nav-link"  th:classappend="${pageName eq 'login'}?'active'" href="/login">Zaloguj się</a></li>
 
-                <li  sec:authorize="isAuthenticated()" th:class="${pageName eq 'logonForm'}? 'active'">
-                    <a class="nav-link" href="#" onclick="document.getElementById('logout').submit()"><span class="glyphicon glyphicon-log-out"></span></a>
+                <li class="nav-item" sec:authorize="isAuthenticated()" th:class="${pageName eq 'login'}? 'active'">
+                    <a class="nav-link" href="#" onclick="document.getElementById('logout').submit()"><span>Wyloguj się</span></a>
                     <form th:action="@{/logout}" id="logout" method="post" style="display: none;"/>
                     </li>
 
             </ul>
 
-        </div>
-    </div>
+
+
 </nav>
 
 

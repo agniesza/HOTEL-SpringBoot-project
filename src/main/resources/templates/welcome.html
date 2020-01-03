@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
 </head>
@@ -21,11 +21,13 @@
             <div class="col-sm-8 text-left">
 
                 <section>
-
+                    <div class="text-center">
+                    <img src="https://popupcity.net/wp-content/uploads/2011/09/Juvet-Landscape-Hotel-1.jpg" class="img-thumbnail" alt="Cinque Terre">
+                    </div>
                     <!--Section heading-->
-                    <h2 class="h1-responsive font-weight-bold text-center my-5">Our best projects</h2>
+                    <h2 class="h1-responsive font-weight-bold text-center my-5" style="font-family: 'Inria Serif', serif">woods</h2>
                     <!-- Section description -->
-                    <p class="grey-text text-center w-responsive mx-auto mb-5">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit est laborum.</p>
+                    <p class="grey-text text-center w-responsive mx-auto mb-5">Hotel położony pośród drzew, z widokiem na góry, gdzie natura łączy się z nowoczesnym stylem.</p>
 
                     <!--Grid row-->
                     <div class="row mx-1">
@@ -34,13 +36,29 @@
                         <div class="col-md-12 mb-4">
                             <div class="card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2832%29.jpg);">
                                 <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-                                    <div>
-                                        <h6 class="purple-text"><i class="fas fa-plane"></i><strong> Travel</strong></h6>
-                                        <h3 class="card-title py-3 font-weight-bold"><strong>This is card title</strong></h3>
-                                        <p class="pb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
-                                            optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
-                                            Odit sed qui, dolorum!</p>
-                                        <a class="btn btn-secondary btn-rounded"><i class="far fa-clone left"></i> View project</a>
+                                    <div style="color:white;">
+                                        <br>
+                                         <h2 class="card-title py-3 font-weight-bold" ><strong>Hotel</strong></h2>
+                                        <br>
+                                        <p class="pb-3"> Zatrzymaj się u nas, w <span style="font-family: 'Inria Serif', serif" >woods</span>
+                                            Elegancja, luksusowy i współczesny design, a także liczne udogodnienia dla Gości - to tylko niektóre zalety naszego wyjątkowego hotelu</p>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Grid column-->
+<br><br>
+                        <!--Grid column-->
+                        <div class="col-md-6 mb-4">
+                            <div class="card card-image" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/img%20%2848%29.jpg');">
+                                <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+                                    <div style="color:white;">
+                                        <br>
+                                        <h3 class="card-title py-3 font-weight-bold"><strong>Restauracja</strong></h3>
+                                        <br>
+                                        <p class="pb-3">To nie tylko hotel, ale także restauracja słynąca z pysznej kuchni oraz duża sala bankietowa (weselna). Posiadamy również sale konferencyjne wyposażone w projektor, nagłośnienie, mikrofon, flipchart, Wi-Fi i klimatyzację. Zapewniamy Gościom hotelu profesjonalną obsługę i dokładamy wszelkich starań, aby zapamiętali nas z jak najlepszej strony.</p>
+                                        <br>
                                     </div>
                                 </div>
                             </div>
@@ -49,32 +67,15 @@
 
                         <!--Grid column-->
                         <div class="col-md-6 mb-4">
-                            <div class="card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img%20%2873%29.jpg);">
+                            <div class="card card-image" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/img%20%2848%29.jpg');">
                                 <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-                                    <div>
-                                        <h6 class="pink-text"><i class="fas fa-chart-pie"></i><strong> Marketing</strong></h6>
-                                        <h3 class="card-title py-3 font-weight-bold"><strong>This is card title</strong></h3>
-                                        <p class="pb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
-                                            optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
-                                            Odit sed qui, dolorum!</p>
-                                        <a class="btn btn-pink btn-rounded"><i class="far fa-clone left"></i> View project</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Grid column-->
+                                    <div style="color:white;">
+                                        <br>
+                                        <h3 class="card-title py-3 font-weight-bold"><strong>Imprezy okolicznościowe</strong></h3>
 
-                        <!--Grid column-->
-                        <div class="col-md-6 mb-4">
-                            <div class="card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/City/6-col/img%20%2847%29.jpg);">
-                                <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-                                    <div>
-                                        <h6 class="green-text"><i class="far fa-eye"></i><strong> Entertainment</strong></h6>
-                                        <h3 class="card-title py-3 font-weight-bold"><strong>This is card title</strong></h3>
-                                        <p class="pb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
-                                            optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
-                                            Odit sed qui, dolorum!</p>
-                                        <a class="btn btn-success btn-rounded"><i class="far fa-clone left"></i> View project</a>
+                                        <br>
+                                        <p class="pb-3">Organizacja konferencji oraz imprez okolicznościowych to nasza specjalizacja. Do dyspozycji Gości oddajemy stylowo urządzone pokoje, eleganckie sale konferencyjne oraz luksusową salę bankietową. Chętnie zorganizujemy dla Państwa wesela, konferecje i wiele przyjęć. </p>
+                                        <br><br>
                                     </div>
                                 </div>
                             </div>
@@ -94,9 +95,7 @@
                         Witaj <span sec:authentication="name"/>!
                     </label>
                 </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
+
             </div>
         </div>
     </div>
