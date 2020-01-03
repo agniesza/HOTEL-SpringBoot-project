@@ -15,8 +15,9 @@
         <div class="row content">
             <div class="col-sm-2 sidenav">
                 <p></p>
-                <p><a href="#">Link</a></p>
-                <p><a href="#">Link</a></p>
+                <div sec:authorize="isAuthenticated()">
+                    <a class="btn btn-success" href="reservationForm.html">Zarezerwuj pokój</a>
+                </div>
             </div>
             <div class="col-sm-8 text-left">
 

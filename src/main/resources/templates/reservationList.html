@@ -14,9 +14,9 @@
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
-            <p></p>
-            <p><a href="#">Link</a></p>
-            <p><a href="#">Link</a></p>
+            <div sec:authorize="isAuthenticated()">
+                <a class="btn btn-success" href="reservationForm.html">Zarezerwuj pokój</a>
+            </div>
         </div>
         <div class="col-sm-8 text-left">
 
@@ -48,7 +48,7 @@
                     <th>Cena </th>
                     <th>Czy opłacono?</th>
                     <th>Czy zweryfikowano?</th>
-                    <th sec:authorize="hasRole('ADMIN')">Opcje</th>
+                    <th >Opcje</th>
 
                 </tr>
                 </thead>
@@ -103,9 +103,10 @@
                     </td>
 
                     <td>
-                        <a class="btn btn-danger">Usuń</a>
-                        <a class="btn btn-success">Edytuj</a>
+                        <a class="btn btn-danger" href="?did=${roomReservation.id}">Usuń</a>
+                        <a class="btn btn-success" href="reservationForm.html?id'${roomReservation.id}">Edytuj</a>
 
+                        <a class="btn btn-success" href="reservationForm.html">Edytuj</a>
                     </td>
 
                 </tr>

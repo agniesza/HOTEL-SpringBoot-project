@@ -5,7 +5,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
 </head>
@@ -16,7 +15,7 @@
     <div class="row content">
         <div class="col-sm-2 sidenav">
             <div sec:authorize="isAuthenticated()">
-                <a class="btn btn-success" href="reservationForm.html">Zarezerwuj pokój</a>
+                <a>Rezerwacja pokoju</a>
             </div>
         </div>
         <div class="col-sm-8 text-left">
