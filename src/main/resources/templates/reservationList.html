@@ -17,9 +17,10 @@
             <div sec:authorize="hasRole('ADMIN')">
                 <a class="btn btn-success" href="reservationFormADM.html">Dodaj rezerwację</a>
             </div>
-            <div sec:authorize="hasRole('USER')">
+
                 <a class="btn btn-success" href="reservationFormUSR.html">Zarezerwuj pokój</a>
-            </div>
+
+
         </div>
 
         <div class="col-sm-8 text-left">
@@ -43,6 +44,7 @@
                 <tr>
                     <th>Numer pokoju</th>
                     <th>Rezerwujący</th>
+                    <th>Opcje</th>
                     <th>Początek rezerwacji</th>
 
                     <th>Koniec rezerwacji</th>
@@ -52,7 +54,7 @@
                     <th>Cena </th>
                     <th>Czy opłacono?</th>
                     <th>Czy zweryfikowano?</th>
-                    <th >Opcje</th>
+
 
                 </tr>
                 </thead>
@@ -67,6 +69,10 @@
                     <td>
                         <span > [[${roomReservation.user.firstName}]]</span>
                         <span > [[${roomReservation.user.lastName}]]</span>
+                    </td>
+                    <td style="align-content: center">
+                        <a class="btn btn-danger">Usuń</a>
+                        <a class="btn btn-success">Edytuj</a>
                     </td>
                     <td>
                         <span th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
@@ -106,12 +112,7 @@
                         </div>
                     </td>
 
-                    <td>
-                        <a class="btn btn-danger" href="?did=${roomReservation.id}">Usuń</a>
-                        <a class="btn btn-success" href="reservationFormUSR.html?id'${roomReservation.id}">Edytuj</a>
 
-
-                    </td>
 
                 </tr>
 

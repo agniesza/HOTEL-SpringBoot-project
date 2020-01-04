@@ -29,7 +29,7 @@ public class UserService {
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         user.setAuthorities(authorities);
-        userRepository.save(user);
+       userRepository.save(user);
     }
     public boolean isUniqueLogin(String username) {
         return userRepository.findByLogin(username) == null;

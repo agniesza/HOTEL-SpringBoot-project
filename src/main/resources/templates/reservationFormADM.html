@@ -20,7 +20,53 @@
         </div>
         <div class="col-sm-8 text-left">
 
+            <form th:method="POST" th:object="${roomReservation}" th:action="@{/reservationFormUSR.html}">
+                <fieldset>
 
+                    <div class="form-group">
+                        <label for="numberOfPeople" class="bmd-label-floating">Liczba osób:</label>
+                        <input id="numberOfPeople" type="text" th:field="*{numberOfPeople}"
+                               class="form-control" th:classappend="${#fields.hasErrors('numberOfPeople')}?'is-invalid'"
+                               required="true"/>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('numberOfPeople')}">
+                            <p th:each="err : ${#fields.errors('numberOfPeople')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reservationStartDate" class="bmd-label-floating">Początek pobytu:</label>
+                        <input id="reservationStartDate" type="date" th:field="*{reservationStartDate}"
+                               class="form-control" th:classappend="${#fields.hasErrors('reservationStartDate')}?'is-invalid'"
+                               required="true"/>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('reservationStartDate')}">
+                            <p th:each="err : ${#fields.errors('reservationStartDate')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reservationEndDate" class="bmd-label-floating">Koniec pobytu:</label>
+                        <input id="reservationEndDate" type="date" th:field="*{reservationEndDate}"
+                               class="form-control" th:classappend="${#fields.hasErrors('reservationEndDate')}?'is-invalid'"
+                               required="true"/>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('reservationEndDate')}">
+                            <p th:each="err : ${#fields.errors('reservationEndDate')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numberOfPeople" class="bmd-label-floating">Liczba osób:</label>
+                        <input id="numberOfPeople" type="text" th:field="*{numberOfPeople}"
+                               class="form-control" th:classappend="${#fields.hasErrors('numberOfPeople')}?'is-invalid'"
+                               required="true"/>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('numberOfPeople')}">
+                            <p th:each="err : ${#fields.errors('numberOfPeople')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-raised">Dalej</button>
+                </fieldset>
+            </form>
 
 
         </div>

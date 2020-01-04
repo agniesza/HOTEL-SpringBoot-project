@@ -33,9 +33,8 @@ public class UserController {
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
         userService.save(userForm);
-        securityService.autoLogin(userForm.getLogin(),userForm.getPassword());
-
-        return "redirect:/welcome.html";
+       // securityService.autoLogin(userForm.getLogin(),userForm.getPassword());
+        return "welcome.html";
     }
 
     @PostMapping("/login")
