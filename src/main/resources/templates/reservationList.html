@@ -17,10 +17,17 @@
             <div sec:authorize="hasRole('ADMIN')">
                 <a class="btn btn-success" href="reservationFormADM.html">Dodaj rezerwację</a>
             </div>
-            <div sec:authorize="hasRole('USER')">
+
+            <div sec:authorize="!hasRole('USER')">
                 <a class="btn btn-success" href="reservationFormUSR.html">Zarezerwuj pokój</a>
             </div>
-
+            <div sec:authorize="isAuthenticated()">
+                Twoje role to:
+                <span th:each="role: ${#authentication.getAuthorities()}">
+                            <span th:text="${role}"/>
+                        </span>
+            </div>
+llllllll
         </div>
 
         <div class="col-sm-8 text-left">
@@ -71,11 +78,11 @@
                         <span > [[${roomReservation.user.lastName}]]</span>
                     </td>
                     <td style="align-content: center">
-                        <a class="btn btn-danger">Usuń</a>
+                        <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/reservationList.html(id=6)}">Usuń</a>
                         <a class="btn btn-success">Edytuj</a>
                     </td>
                     <td>
-                        <span th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
+                        <span  th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
                     </td>
                     <td>
                         <span th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span>
