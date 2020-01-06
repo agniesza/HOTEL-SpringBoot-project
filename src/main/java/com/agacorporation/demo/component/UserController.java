@@ -57,4 +57,9 @@ public class UserController {
     public String welcome(Model model) {
         return "welcome.html";
     }
+
+    @GetMapping({"/contact"})
+    public String contact(Model model) {
+        return "contact.html";
+    }
 }
