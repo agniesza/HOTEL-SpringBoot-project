@@ -11,6 +11,10 @@ public class RoomType implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public Long getId() {
+        return id;
+    }
+
     @Column(name="name",nullable = false)
     private String roomTypeName;
     @Column(name = "min_price", nullable = false)

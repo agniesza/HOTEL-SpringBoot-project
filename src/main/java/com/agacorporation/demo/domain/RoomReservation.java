@@ -78,6 +78,14 @@ this.room=new Room();
         return room;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public boolean isPaid() {
         return paid;
     }
