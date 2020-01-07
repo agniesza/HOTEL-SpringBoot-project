@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel</title>
+    <div th:replace="shared/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="shared/header :: header('welcome')"/>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <div sec:authorize="isAuthenticated()">
+                <a class="btn btn-success" href="reservationFormUSR.html">Zarezerwuj pokój</a>
+            </div>
+        </div>
+        <div class="col-sm-8 text-left">
+
+            <H1>Informacje o pokoju</H1>
+            Id: <b th:text="${room.id}"></b><br/>
+            Numer pokoju:: <b th:text="${room.roomNumber}"></b><br/>
+            Piętro: <b th:text="${room.floor}"></b><br/>
+            Typ: <b th:text="${room.roomType.name}"></b><br/>
+            Cena za dobę: <b th:text="${room.price}"></b><br/>
+            Max liczba osób: <b th:text="${room.maxNumberOfPeople}"></b><br/>
+            Łóżka podwójne: <b th:text="${room.doubleBeds}"></b><br/>
+            Łóżka pojedyncze: <b th:text="${room.singleBeds}"></b><br/>
+
+            <a class="btn btn-success" href="/reservationList.html">Wstecz</a>
+
+
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <label style="color:darkred; margin-top: 20px;" sec:authorize="isAuthenticated()">
+                    Witaj <span sec:authentication="name"/>!
+                </label>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
