@@ -1,6 +1,7 @@
 package com.agacorporation.demo.component;
 
 import com.agacorporation.demo.service.RoomReservationService;
+import com.agacorporation.demo.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,6 @@ public class ReservationListController {
 
     @Autowired
     private RoomReservationService roomReservationService;
-
 
     @RequestMapping(value="/reservationList", method = {RequestMethod.GET, RequestMethod.POST})
     public String showRoomReservationList(Model model, Pageable pageable){
@@ -44,5 +44,10 @@ public class ReservationListController {
     private String prepareQueryString(String queryString) {//np., did=20&page=2&size=20
         return queryString.substring(queryString.indexOf("&")+1);//obcinamy parametr did, bo inaczej znowu będzie wywołana metoda deleteVihicle
     }
+
+
+
+
+
 
 }
