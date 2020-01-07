@@ -28,10 +28,12 @@ public class ReservationListController {
         model.addAttribute("roomReservationListPage", roomReservationService.getAllRoomReservations(pageable));
         return "reservationList.html";
     }
+
     @GetMapping({"/deleteInfo"})
     public String showDeleteInfo(Model model) {
         return "deleteInfo.html";
     }
+
 
     @RequestMapping(value="/reservationList.html", params = "id", method = RequestMethod.GET)
     public String deleteRoomReservation(long id, HttpServletRequest request){

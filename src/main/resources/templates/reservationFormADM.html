@@ -24,6 +24,17 @@
                 <fieldset>
 
                     <div class="form-group">
+                        <label for="user.login" class="bmd-label-floating">Login rezerwującego gościa hotelu:</label>
+                        <input id="user.login" type="text" th:field="*{user.login}"
+                               class="form-control" th:classappend="${#fields.hasErrors('user.login')}?'is-invalid'"
+                               required="true"/>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('user.login')}">
+                            <p th:each="err : ${#fields.errors('user.login')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="numberOfPeople" class="bmd-label-floating">Liczba osób:</label>
                         <input id="numberOfPeople" type="text" th:field="*{numberOfPeople}"
                                class="form-control" th:classappend="${#fields.hasErrors('numberOfPeople')}?'is-invalid'"

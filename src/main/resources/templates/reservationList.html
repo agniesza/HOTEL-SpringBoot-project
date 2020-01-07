@@ -19,11 +19,11 @@
                     Witaj <span sec:authentication="name"/>!
                 </label>
             </div>
-            <div sec:authorize="hasRole('ADMIN')">
+            <div sec:authorize="!hasRole('ADMIN')">
                 <a class="btn btn-success" href="reservationFormADM.html">Dodaj rezerwację</a>
             </div>
 
-            <div sec:authorize="hasRole('USER')">
+            <div sec:authorize="!hasRole('USER')">
                 <a class="btn btn-success" href="reservationFormUSR.html">Zarezerwuj pokój</a>
             </div>
             <div sec:authorize="isAuthenticated()">

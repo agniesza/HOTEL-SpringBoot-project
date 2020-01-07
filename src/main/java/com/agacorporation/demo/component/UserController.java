@@ -61,10 +61,15 @@ public class UserController {
         return "contact.html";
     }
 
+    @GetMapping({"/userDetails"})
+    public String showUserDetails(Model model) {
+        return "userDetails.html";
+    }
+
     @RequestMapping(value="/reservationList.html", params = {"uid"}, method = RequestMethod.GET)
     public String showUserDetails(Model model, long uid){
         User u = userService.getUser(uid);
         model.addAttribute("user", u);
-        return "redirect:userDetails.html";
+        return "userDetails";
     }
 }
