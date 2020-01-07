@@ -14,11 +14,16 @@
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
+            <div class="well">
+                <label style="color:darkred; margin-top: 20px;" sec:authorize="isAuthenticated()">
+                    Witaj <span sec:authentication="name"/>!
+                </label>
+            </div>
             <div sec:authorize="hasRole('ADMIN')">
                 <a class="btn btn-success" href="reservationFormADM.html">Dodaj rezerwację</a>
             </div>
 
-            <div sec:authorize="!hasRole('USER')">
+            <div sec:authorize="hasRole('USER')">
                 <a class="btn btn-success" href="reservationFormUSR.html">Zarezerwuj pokój</a>
             </div>
             <div sec:authorize="isAuthenticated()">
@@ -27,7 +32,7 @@
                             <span th:text="${role}"/>
                         </span>
             </div>
-llllllll
+
         </div>
 
         <div class="col-sm-8 text-left">
@@ -40,7 +45,7 @@ llllllll
                 </div>
             </form>
             <div th:if="${roomReservationListPage.hasContent() eq false}">
-                <span>Brak pojazdów w bazie</span>
+                <span>Brak rezerwacji</span>
                    </div>
             <div th:if="${roomReservationListPage.hasContent() eq true}">
                 <span>  Rezerwacji: [[${roomReservationListPage.totalElements}]] </span>
@@ -69,16 +74,18 @@ llllllll
                 <tr th:each="roomReservation : ${roomReservationListPage.content}">
 
                     <td>
-                      <!--  <a sec:authorize="isAuthenticated()" th:href="@{/reservationList.html(id=${roomReservation.id})}">[[${roomReservation.room.roomNumber}]]</a> -->
-                        <span > [[${roomReservation.room.roomNumber}]]</span>
+                       <a  th:href="@{/reservationList.html(rid=${roomReservation.room.id})}">[[${roomReservation.room.roomNumber}]]</a>
 
                     </td>
                     <td>
-                        <span > [[${roomReservation.user.firstName}]]</span>
-                        <span > [[${roomReservation.user.lastName}]]</span>
+                        <a th:href="@{/reservationList.html(uid=${roomReservation.user.id})}">
+                            <span > [[${roomReservation.user.firstName}]]</span>
+                            <span > [[${roomReservation.user.lastName}]]</span>
+                        </a>
+
                     </td>
                     <td style="align-content: center">
-                        <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/reservationList.html(id=6)}">Usuń</a>
+                        <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/reservationList.html(id=${roomReservation.id})}">Usuń</a>
                         <a class="btn btn-success">Edytuj</a>
                     </td>
                     <td>
@@ -125,6 +132,7 @@ llllllll
 
                 </tbody>
             </table>
+                <div th:replace="shared/pagination :: pager(reservationList.html, ${roomReservationListPage})"></div>
 
 
 
@@ -133,11 +141,7 @@ llllllll
              </div>
         </div>
         <div class="col-sm-2 sidenav">
-            <div class="well">
-                <label style="color:darkred; margin-top: 20px;" sec:authorize="isAuthenticated()">
-                    Witaj <span sec:authentication="name"/>!
-                </label>
-            </div>
+
 
         </div>
     </div>
