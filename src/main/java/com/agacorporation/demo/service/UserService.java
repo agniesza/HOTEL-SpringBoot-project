@@ -2,6 +2,7 @@ package com.agacorporation.demo.service;
 
 import com.agacorporation.demo.domain.Authority;
 import com.agacorporation.demo.domain.User;
+import com.agacorporation.demo.exceptions.UserNotFoundException;
 import com.agacorporation.demo.repository.AuthorityRepository;
 import com.agacorporation.demo.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -35,6 +37,12 @@ public class UserService {
         List roles = Arrays.asList(userRole);
         user.setAuthorities(new HashSet<>(roles));
        userRepository.save(user);
+    }
+
+    public User getUser(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        User user = optionalUser.orElseThrow(()->new UserNotFoundException(id));
+        return user;
     }
     public boolean isUniqueLogin(String username) {
         return userRepository.findByLogin(username) == null;

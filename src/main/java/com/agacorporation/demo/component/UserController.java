@@ -1,5 +1,6 @@
 package com.agacorporation.demo.component;
 
+import com.agacorporation.demo.domain.Room;
 import com.agacorporation.demo.domain.User;
 import com.agacorporation.demo.service.SecurityService;
 import com.agacorporation.demo.service.UserService;
@@ -7,10 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping
@@ -61,5 +59,12 @@ public class UserController {
     @GetMapping({"/contact"})
     public String contact(Model model) {
         return "contact.html";
+    }
+
+    @RequestMapping(value="/reservationList.html", params = {"uid"}, method = RequestMethod.GET)
+    public String showUserDetails(Model model, long uid){
+        User u = userService.getUser(uid);
+        model.addAttribute("user", u);
+        return "redirect:userDetails.html";
     }
 }
