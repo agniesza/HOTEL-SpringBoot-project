@@ -33,7 +33,7 @@ public class UserService {
 
         user.setAuthorities(authorities);
 */
-        Authority userRole = authorityRepository.findAuthorityByName("USER");
+        Authority userRole = authorityRepository.findAuthorityByName("ROLE_USER");
         List roles = Arrays.asList(userRole);
         user.setAuthorities(new HashSet<>(roles));
        userRepository.save(user);
