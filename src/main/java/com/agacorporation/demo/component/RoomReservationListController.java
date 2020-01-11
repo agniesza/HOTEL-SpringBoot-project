@@ -1,9 +1,8 @@
 package com.agacorporation.demo.component;
 
 import com.agacorporation.demo.component.commands.RoomReservationFilter;
-import com.agacorporation.demo.domain.RoomReservation;
 import com.agacorporation.demo.service.RoomReservationService;
-import com.agacorporation.demo.service.RoomService;
+import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
@@ -20,29 +19,14 @@ import javax.validation.Valid;
 
 @Controller
 @SessionAttributes("searchCommand")
-public class ReservationListController {
-/*
+public class RoomReservationListController {
+
     @Autowired
     private RoomReservationService roomReservationService;
-
-
 
     @GetMapping({"/deleteInfo"})
     public String showDeleteInfo(Model model) {
         return "deleteInfo.html";
-    }
-
-
-    @RequestMapping(value="/reservationList.html", params = "id", method = RequestMethod.GET)
-    public String deleteRoomReservation(long id, HttpServletRequest request){
-        roomReservationService.deleteRoomReservation(id);
-        String queryString = prepareQueryString(request.getQueryString());
-    //    return String.format("redirect:reservationList.html?%s", queryString);//robimy przekierowanie, ale zachowując parametry pageingu
-  //  return "reservationList.html";
-        return "deleteInfo";
-    }
-    private String prepareQueryString(String queryString) {//np., did=20&page=2&size=20
-        return queryString.substring(queryString.indexOf("&")+1);//obcinamy parametr did, bo inaczej znowu będzie wywołana metoda deleteVihicle
     }
 
     @ModelAttribute("searchCommand")
@@ -55,8 +39,7 @@ public class ReservationListController {
         search.clear();
         return "redirect:reservationList.html";
     }
-
-    @RequestMapping(value="/reservationList.html", method = {RequestMethod.POST})
+    @RequestMapping(value="/reservationList.html", method = {RequestMethod.POST, RequestMethod.GET})
     public String showReservationList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result){
 
         model.addAttribute("roomReservationListPage", roomReservationService.getAllRoomReservations(search, pageable));
@@ -65,20 +48,16 @@ public class ReservationListController {
         // return "redirect:reservationList";
     }
 
-    @GetMapping(value="/reservationList.html")
-    public String showReservationList2(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result){
-
-        model.addAttribute("roomReservationListPage", roomReservationService.getAllRoomReservations(search, pageable));
-
-        return "reservationList";
-       // return "redirect:reservationList";
+    @RequestMapping(value="/reservationList.html", params = "id", method = RequestMethod.GET)
+    public String deleteRoomReservation(long id, HttpServletRequest request){
+        roomReservationService.deleteRoomReservation(id);
+        String queryString = prepareQueryString(request.getQueryString());
+        //    return String.format("redirect:reservationList.html?%s", queryString);//robimy przekierowanie, ale zachowując parametry pageingu
+        //  return "reservationList.html";
+        return "deleteInfo";
     }
-
-
-
-
-
-*/
-
+    private String prepareQueryString(String queryString) {//np., did=20&page=2&size=20
+        return queryString.substring(queryString.indexOf("&")+1);//obcinamy parametr did, bo inaczej znowu będzie wywołana metoda deleteVihicle
+    }
 
 }

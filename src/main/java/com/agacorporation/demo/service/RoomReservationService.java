@@ -1,5 +1,6 @@
 package com.agacorporation.demo.service;
 
+import com.agacorporation.demo.component.commands.RoomReservationFilter;
 import com.agacorporation.demo.domain.Room;
 import com.agacorporation.demo.domain.RoomReservation;
 import com.agacorporation.demo.domain.RoomType;
@@ -14,9 +15,9 @@ public interface RoomReservationService {
 
     List<RoomType> getAllRoomTypes();
 
-    Page<RoomReservation> getAllRoomReservations(Pageable pageable);
+    Page<RoomReservation> getAllRoomReservations(RoomReservationFilter search, Pageable pageable);
 
-    RoomReservation getRoomReservations(Long id);
+    RoomReservation getRoomReservation(Long id);
 
     void deleteRoomReservation(Long id);
 

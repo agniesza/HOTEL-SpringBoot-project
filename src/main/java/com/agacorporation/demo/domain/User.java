@@ -26,11 +26,11 @@ public class User implements Serializable {
     @UniqueUsername
     private String login;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     @Email
     private String email;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
@@ -41,9 +41,12 @@ public class User implements Serializable {
     private String password;
 
     @Size(min=0,max=10)
-    @Column(name="phone_number"  , nullable = false)
+    @Column(name="phone_number")
     private String phoneNumber;
-
+public User(String login){
+    this.login=login;
+}
+public User(){}
     @JsonIgnore
     @ManyToMany
     @JoinTable(

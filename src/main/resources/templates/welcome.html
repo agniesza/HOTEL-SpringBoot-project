@@ -16,8 +16,20 @@
         <div class="row content">
             <div class="col-sm-2 sidenav">
                 <p></p>
-                <div sec:authorize="isAuthenticated()">
+                <div sec:authorize="hasRole('ADMIN')">
+                    <a class="btn btn-success" href="reservationFormADM.html">Dodaj rezerwację</a>
+                </div>
+
+                <div sec:authorize="hasRole('USER')">
                     <a class="btn btn-success" href="reservationFormUSR.html">Zarezerwuj pokój</a>
+
+                </div>
+                <div sec:authorize="isAuthenticated()">
+
+                    Twoje role to:
+                    <span th:each="role: ${#authentication.getAuthorities()}">
+                            <span th:text="${role}"/>
+                        </span>
                 </div>
             </div>
             <div class="col-sm-8 text-left">

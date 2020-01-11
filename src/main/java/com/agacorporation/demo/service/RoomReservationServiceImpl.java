@@ -1,5 +1,6 @@
 package com.agacorporation.demo.service;
 
+import com.agacorporation.demo.component.commands.RoomReservationFilter;
 import com.agacorporation.demo.domain.Room;
 import com.agacorporation.demo.domain.RoomReservation;
 import com.agacorporation.demo.domain.RoomType;
@@ -7,10 +8,13 @@ import com.agacorporation.demo.exceptions.RoomReservationNotFoundException;
 import com.agacorporation.demo.repository.RoomRepository;
 import com.agacorporation.demo.repository.RoomReservationRepository;
 import com.agacorporation.demo.repository.RoomTypeRepository;
+import com.agacorporation.demo.repository.specifications.RoomReservationsSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,15 +43,41 @@ public class RoomReservationServiceImpl implements RoomReservationService {
     }
 
     @Override
-    public Page<RoomReservation> getAllRoomReservations(Pageable pageable) {
+    public Page<RoomReservation> getAllRoomReservations(RoomReservationFilter search, Pageable pageable) {
+       // Page page;
+        //page = roomReservationRepository.findAll(pageable);
+
+        //return page;
+
         Page page;
-        page = roomReservationRepository.findAll(pageable);
+        if(search.isEmpty()){
+            page = roomReservationRepository.findAll(pageable);
+        }else{
+
+
+/*
+            page = roomReservationRepository.findAll(
+                    Specification.where(
+
+                            RoomReservationsSpecifications.findByPhrase(search.getPhrase())
+                                    .and(
+
+                                    VehicleSpecifications.findByPriceRange(search.getMinPrice(),
+                                            search.getMaxPrice()))
+
+
+                    ), pageable);
+*/
+
+            page = roomReservationRepository.findAllRoomReservationsUsingFilter(search.getPhraseLIKE(), pageable);
+        }
 
         return page;
     }
 
+    @Transactional
     @Override
-    public RoomReservation getRoomReservations(Long id) {
+    public RoomReservation getRoomReservation(Long id) {
        Optional<RoomReservation> optionalRoomReservation = roomReservationRepository.findById(id);
         RoomReservation roomReservation = optionalRoomReservation.orElseThrow(()->new RoomReservationNotFoundException(id));
         return roomReservation;

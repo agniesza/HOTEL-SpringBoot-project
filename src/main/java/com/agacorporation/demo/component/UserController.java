@@ -52,7 +52,8 @@ public class UserController {
     }
 
     @GetMapping({"/", "/welcome"})
-    public String welcome(Model model) {
+    public String welcome(Model model, User user) {
+
         return "welcome.html";
     }
 
