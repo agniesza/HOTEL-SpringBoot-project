@@ -1,10 +1,42 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Hotel</title>
+    <div th:replace="shared/header :: header-css"/>
 </head>
 <body>
+
+<div th:replace="shared/header :: header('yourReservationList')"/>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <div sec:authorize="isAuthenticated()">
+                <a class="btn btn-success" href="reservationFormUSR.html">Zarezerwuj pokój</a>
+            </div>
+        </div>
+        <div class="col-sm-8 text-left">
+
+
+
+
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <label style="color:darkred; margin-top: 20px;" sec:authorize="isAuthenticated()">
+                    Witaj <span sec:authentication="name"/>!
+                </label>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
 
 </body>
 </html>
