@@ -14,8 +14,7 @@ public class RoomReservationFilter {
 
     private Date reservationStartDate;
     private Date reservationEndDate;
-    private Date checkInDate;
-    private Date checkOutDate;
+
 
     @PositiveOrZero
     private Float roomNumber;
@@ -28,13 +27,13 @@ public class RoomReservationFilter {
 
     public boolean isEmpty(){
        // return StringUtils.isEmpty(phrase) && minPrice == null && minPrice == null;
-        return StringUtils.isEmpty(phrase);
+        return StringUtils.isEmpty(phrase) && reservationEndDate == null && reservationStartDate == null;
     }
 
     public void clear(){
         this.phrase = "";
-      //  this.minPrice = null;
-       // this.maxPrice = null;
+        this.reservationStartDate=null;
+        this.reservationEndDate=null;
     }
 
     public String getPhraseLIKE(){
@@ -57,20 +56,19 @@ public class RoomReservationFilter {
         this.phrase = phrase;
     }
 
-    public Float getMinPrice() {
-        return null;
+    public Date getReservationStartDate() {
+        return reservationStartDate;
     }
 
-    public void setMinPrice(Float minPrice) {
-     //   this.minPrice = minPrice;
+    public void setReservationStartDate(Date reservationStartDate) {
+        this.reservationStartDate = reservationStartDate;
     }
 
-    public Float getMaxPrice() {
-     //   return maxPrice;
-        return null;
+    public Date getReservationEndDate() {
+        return reservationEndDate;
     }
 
-    public void setMaxPrice(Float maxPrice) {
-       // this.maxPrice = maxPrice;
+    public void setReservationEndDate(Date reservationEndDate) {
+        this.reservationEndDate = reservationEndDate;
     }
 }

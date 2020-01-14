@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
+
 public interface RoomReservationRepository
        extends JpaRepository<RoomReservation, Long>, JpaSpecificationExecutor<RoomReservation>
 {
@@ -22,12 +24,9 @@ public interface RoomReservationRepository
             ":phrase is null OR :phrase = '' OR "+
             "upper(v.user.firstName) LIKE upper(:phrase) OR " +
             "upper(v.user.lastName) LIKE upper(:phrase) OR " +
-            "upper(v.user.login) LIKE upper(:phrase)" +
-            ") "
-            //+
-          //  "AND " +
-           // "(:min is null OR :min <= v.price) " +
-            //"AND (:max is null OR :max >= v.price)"
+            "upper(v.user.login) LIKE upper(:phrase) )"
+
+
     )
     Page<RoomReservation> findAllRoomReservationsUsingFilter(@Param("phrase") String p, Pageable pageable);
 
