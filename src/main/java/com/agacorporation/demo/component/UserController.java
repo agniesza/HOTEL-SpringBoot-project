@@ -27,6 +27,7 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     private final UserService userService;
     private final SecurityService securityService;
 
@@ -49,24 +50,15 @@ public class UserController {
     @Secured("ROLE_ADMIN")
     @PostMapping("/addUser")
     public String addUser(@ModelAttribute("userForm") User userForm, BindingResult bindingResult){
+        userForm.setPassword(passwordEncoder.encode("testowe"));
         userService.save(userForm);
-        System.out.println("tut1");
-        return "welcome.html";
-    }
-    @Secured("ROLE_ADMIN")
-    @PostMapping("/addUser.html")
-    public String addUser2(@ModelAttribute("userForm") User userForm, BindingResult bindingResult){
-        userService.save(userForm);
-        System.out.println("tut2");
         return "welcome.html";
     }
 
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
         userService.save(userForm);
-       // securityService.autoLogin(userForm.getLogin(),userForm.getPassword());
-        System.out.println("reje");
-        return "welcome.html";
+         return "welcome.html";
     }
 
     @PostMapping("/login")
@@ -119,6 +111,14 @@ public class UserController {
 
         model.addAttribute("userListPage", userService.getAllUsers(search, pageable));
 
+        return "userList";
+    }
+
+    @RequestMapping(value="/userList.html", method = {RequestMethod.POST})
+    public String showUserList2(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") UserFilter search, BindingResult result){
+
+        model.addAttribute("userListPage", userService.getAllUsers(search, pageable));
+        System.out.println("fraza "+search.getPhrase());
         return "userList";
         // return "redirect:reservationList";
     }

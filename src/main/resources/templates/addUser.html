@@ -19,7 +19,7 @@
         <div class="col-sm-8 text-left">
 
 
-            <form th:method="POST" th:action="@{userAdd.html}"th:object="${userForm}">
+            <form th:method="POST" th:object="${userForm}">
                 <fieldset>
                     <h1>Rejestracja użytkownika</h1>
                     <div class="form-group">
@@ -59,10 +59,8 @@
                     </div>
 
                     <div class="form-group">
-                        Hasło:
-                        <input type="password" th:field="*{password}"
-                               class="form-control" placeholder="" required="true" autofocus="true"/>
-                    </div>
+                        Hasło do logowania zostanie przesłane na podanego maila.
+                        </div>
 
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
