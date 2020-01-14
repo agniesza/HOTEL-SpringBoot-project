@@ -15,7 +15,7 @@ import java.util.Locale;
 import java.util.Set;
 
 @Entity
-@Table(name = "t_user")
+@Table(name = "users")
 public class User implements Serializable {
 
     @Id
@@ -50,9 +50,9 @@ public User(){}
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-            name = "t_user_authority",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_name",referencedColumnName = "name")})
+            name = "users_authorities",
+            joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "authorities_name",referencedColumnName = "name")})
 
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();

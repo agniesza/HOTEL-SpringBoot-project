@@ -8,7 +8,7 @@ import javax.validation.Valid;
 
 
 @Entity
-@Table(name = "t_room")
+@Table(name = "rooms")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +42,7 @@ public class Room {
 
     @Valid
     @ManyToOne(fetch = FetchType.EAGER)//EAGER powoduje pobranie obiektu roomtype wraz z obiektem room.
-    @JoinColumn(name="type_id", nullable = false)
+    @JoinColumn(name="types_id", nullable = false)
     private RoomType roomType;
 
     public Room(int maxNumberOfPeople, int roomNumber, int floor, int price, int doubleBeds, int singleBeds, @Valid RoomType roomType) {

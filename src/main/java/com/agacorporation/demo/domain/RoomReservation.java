@@ -5,7 +5,7 @@ import javax.validation.Valid;
 import java.util.Date;
 
 @Entity
-@Table(name = "t_room_reservation")
+@Table(name = "room_reservations")
 public class RoomReservation {
 
     @Id
@@ -15,13 +15,13 @@ public class RoomReservation {
 
     @Valid
     @ManyToOne(fetch = FetchType.EAGER)//
-    @JoinColumn(name="room_id", nullable = false)
+    @JoinColumn(name="rooms_id", nullable = false)
     private Room room;
 
 
     @Valid
     @ManyToOne(fetch = FetchType.EAGER)//
-    @JoinColumn(name="user_id", nullable = false)
+    @JoinColumn(name="users_id", nullable = false)
     private User user;
 
     @Column(name = "end_price", nullable = false)

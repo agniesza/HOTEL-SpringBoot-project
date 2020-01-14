@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "t_authority")
+@Table(name = "authorities")
 public class Authority implements Serializable {
 
     @Id
