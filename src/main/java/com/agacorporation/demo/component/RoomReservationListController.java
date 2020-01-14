@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @SessionAttributes("searchCommand")
@@ -39,8 +40,18 @@ public class RoomReservationListController {
         search.clear();
         return "redirect:reservationList.html";
     }
-    @RequestMapping(value="/reservationList.html", method = {RequestMethod.POST, RequestMethod.GET})
-    public String showReservationList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result){
+    @RequestMapping(value="/reservationList.html", method = {RequestMethod.GET})
+    public String showReservationList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result, Principal principal){
+
+        model.addAttribute("roomReservationListPage", roomReservationService.getAllRoomReservations(search, pageable));
+        System.out.println("fraza "+search.getPhrase());
+        System.out.println("name: "+principal.getName());
+
+        return "reservationList";
+        // return "redirect:reservationList";
+    }
+    @RequestMapping(value="/reservationList.html", method = {RequestMethod.POST})
+    public String showReservationList2(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result){
 
         model.addAttribute("roomReservationListPage", roomReservationService.getAllRoomReservations(search, pageable));
         System.out.println("fraza "+search.getPhrase());

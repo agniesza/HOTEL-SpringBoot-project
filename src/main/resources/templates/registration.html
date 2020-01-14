@@ -1,79 +1,97 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en">
 <head>
+    <meta charset="utf-8">
 
-    <title>Rejestracja</title>
+    <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
 </head>
 <body>
 
+<div th:replace="shared/header :: header('welcome')"/>
 
-<div class="container">
-    <div th:replace="shared/header :: header('registration')"/>
-    <div class="row" style="margin-top:20px">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form th:method="POST" th:object="${userForm}">
-                <fieldset>
-                    <h1>Proszę, zarejestruj się</h1>
-                    <div class="form-group">
-                        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
-                            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+
+        </div>
+        <div class="col-sm-8 text-left">
+
+
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form th:method="POST" th:object="${userForm}">
+                    <fieldset>
+                        <h1>Proszę, zarejestruj się</h1>
+                        <div class="form-group">
+                            <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                                <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        Login:
-                        <input type="text" th:field="*{login}"
-                               class="form-control" placeholder="" required="true" autofocus="true"/>
-                    </div>
-
-                    <div class="form-group">
-                        Imię:
-                        <input type="text" th:field="*{firstName}"
-                               class="form-control" placeholder="" required="true" autofocus="true"/>
-                    </div>
-
-                    <div class="form-group">
-                        Nazwisko:
-                        <input type="text" th:field="*{lastName}"
-                               class="form-control" placeholder="" required="true" autofocus="true"/>
-                    </div>
-
-
-                    <div class="form-group">
-                        Email:
-                        <input type="text" th:field="*{email}"
-                               class="form-control" placeholder="" required="true" autofocus="true"/>
-                    </div>
-                    <div class="form-group">
-                        Numer telefonu:
-                        <input type="text" th:field="*{phoneNumber}"
-                               class="form-control" placeholder="" required="true" autofocus="true"/>
-                    </div>
-
-                    <div class="form-group">
-                        Hasło:
-                        <input type="password" th:field="*{password}"
-                               class="form-control" placeholder="" required="true" autofocus="true"/>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-
-
-                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Zarejestruj"/>
+                        <div class="form-group">
+                            Login:
+                            <input type="text" th:field="*{login}"
+                                   class="form-control" placeholder="" required="true" autofocus="true"/>
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
+
+                        <div class="form-group">
+                            Imię:
+                            <input type="text" th:field="*{firstName}"
+                                   class="form-control" placeholder="" required="true" autofocus="true"/>
                         </div>
-                    </div>
-                </fieldset>
-            </form>
+
+                        <div class="form-group">
+                            Nazwisko:
+                            <input type="text" th:field="*{lastName}"
+                                   class="form-control" placeholder="" required="true" autofocus="true"/>
+                        </div>
+
+
+                        <div class="form-group">
+                            Email:
+                            <input type="text" th:field="*{email}"
+                                   class="form-control" placeholder="" required="true" autofocus="true"/>
+                        </div>
+                        <div class="form-group">
+                            Numer telefonu:
+                            <input type="text" th:field="*{phoneNumber}"
+                                   class="form-control" placeholder="" required="true" autofocus="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            Hasło:
+                            <input type="password" th:field="*{password}"
+                                   class="form-control" placeholder="" required="true" autofocus="true"/>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+
+
+                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Zarejestruj"/>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+
+            </div>
+
         </div>
     </div>
-
 </div>
+
+
+
 
 </body>
 </html>
+

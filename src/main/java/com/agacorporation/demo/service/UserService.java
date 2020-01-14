@@ -1,10 +1,13 @@
 package com.agacorporation.demo.service;
 
+import com.agacorporation.demo.component.commands.UserFilter;
 import com.agacorporation.demo.domain.Authority;
 import com.agacorporation.demo.domain.User;
 import com.agacorporation.demo.exceptions.UserNotFoundException;
 import com.agacorporation.demo.repository.AuthorityRepository;
 import com.agacorporation.demo.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +53,18 @@ public class UserService {
 
     public User getUserByLogin(String login) {
         return userRepository.findByLogin(login);
+    }
+    public Page<User> getAllUsers(UserFilter search, Pageable pageable) {
+
+        Page page;
+        if(search.isEmpty()){
+            page = userRepository.findAll(pageable);
+        }else{
+
+
+            page = userRepository.findAllUsersUsingFilter(search.getPhraseLIKE(), pageable);
+        }
+
+        return page;
     }
 }

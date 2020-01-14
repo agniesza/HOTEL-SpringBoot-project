@@ -41,10 +41,10 @@
 
         <div class="col-sm-8 text-left">
 
-            <form th:method="POST" th:action="@{reservationList.html}" th:object="${searchCommand}">
+            <form th:method="POST" th:action="@{userList.html}" th:object="${searchCommand}">
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <input th:field="*{phrase}" placeholder="imię/nazwisko/login Gościa hotelu" class="form-control"
+                        <input th:field="*{phrase}" placeholder="imię/nazwisko/login/email/numer telefonu" class="form-control"
                                th:classappend="${#fields.hasErrors('phrase')}?'is-invalid'"/>
                         <div class="error text-danger" th:if="${#fields.hasErrors('phrase')}">
                             <p th:each="err : ${#fields.errors('phrase')}" th:text="${err}"></p>
@@ -80,15 +80,15 @@
                 </div>
             </form>
 
-            <div th:if="${roomReservationListPage.hasContent() eq false}">
-                <span>Brak rezerwacji</span>
-                   </div>
-            <div th:if="${roomReservationListPage.hasContent() eq true}">
+            <div th:if="${userListPage.hasContent() eq false}">
+                <span>Brak użytkowników</span>
+            </div>
+            <div th:if="${userListPage.hasContent() eq true}">
                   <span th:if="${searchCommand.isEmpty()}">
-                Baza zawiera [[${roomReservationListPage.totalElements}]] rezerwacji
+                Baza zawiera [[${userListPage.totalElements}]] użytkowników
             </span>
                 <span th:unless="${searchCommand.isEmpty()}">
-                Wynik wyszukiwania: [[${roomReservationListPage.totalElements}]] rezerwacji
+                Wynik wyszukiwania: [[${userListPage.totalElements}]] użytkowników
             </span>
             </div>
 
@@ -96,77 +96,39 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Numer pokoju</th>
-                    <th>Rezerwujący</th>
-                    <th>Opcje</th>
-                    <th>Początek rezerwacji</th>
+                    <th>Login</th>
+                    <th>Imię i nazwisko</th>
+                    <th>Email</th>
 
-                    <th>Koniec rezerwacji</th>
-                    <th>Check-in</th>
-                    <th>Check-out</th>
-                    <th>Liczba osób</th>
-                    <th>Cena </th>
-                    <th>Czy opłacono?</th>
-                    <th>Czy zweryfikowano?</th>
+                    <th>Numer telefonu</th>
+
 
 
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="roomReservation : ${roomReservationListPage.content}">
+                <tr th:each="user : ${userListPage.content}">
 
                     <td>
-                       <a  th:href="@{/reservationList.html(rid=${roomReservation.room.id})}">[[${roomReservation.room.roomNumber}]]</a>
+                       [[${user.login}]]</a>
 
                     </td>
                     <td>
-                        <a th:href="@{/reservationList.html(uid=${roomReservation.user.id})}">
-                            <span > [[${roomReservation.user.firstName}]]</span>
-                            <span > [[${roomReservation.user.lastName}]]</span>
+
+                            <span > [[${user.firstName}]]</span>
+                            <span > [[${user.lastName}]]</span>
                         </a>
 
                     </td>
-                    <td style="align-content: center">
-                        <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/reservationList.html(id=${roomReservation.id})}">Usuń</a>
-                        <a class="btn btn-success">Edytuj</a>
-                    </td>
-                    <td>
-                        <span  th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span>
 
+                    <td>
+                        <span > [[${user.email}]]</span>
                     </td>
                     <td>
-                        <span th:text="${#dates.format(roomReservation.checkInDate, 'dd-MM-yyyy')}"></span>
+                        <span > [[${user.phoneNumber}]]</span>
+                    </td>
 
-                    </td>
-                    <td>
-                        <span th:text="${#dates.format(roomReservation.checkOutDate, 'dd-MM-yyyy')}"></span>
 
-                    </td>
-                    <td>
-                        <span > [[${roomReservation.numberOfPeople}]]</span>
-                    </td>
-                    <td>
-                        <span > [[${roomReservation.endPrice}]]</span>
-                    </td>
-                    <td>
-                        <div th:if="${roomReservation.paid eq true}">
-                        <span > Tak</span>
-                        </div>
-                        <div th:if="${roomReservation.paid eq false}">
-                            <span >Nie</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div th:if="${roomReservation.verified eq true}">
-                            <span > Tak</span>
-                        </div>
-                        <div th:if="${roomReservation.verified eq false}">
-                            <span >Nie</span>
-                        </div>
-                    </td>
 
 
 
@@ -174,19 +136,19 @@
 
                 </tbody>
             </table>
-                <div th:replace="shared/pagination :: pager(reservationList.html, ${roomReservationListPage})"></div>
+            <div th:replace="shared/pagination :: pager(userList.html, ${userListPage})"></div>
 
 
 
-
-
-             </div>
-        </div>
-        <div class="col-sm-2 sidenav">
 
 
         </div>
     </div>
+    <div class="col-sm-2 sidenav">
+
+
+    </div>
+</div>
 </div>
 
 
