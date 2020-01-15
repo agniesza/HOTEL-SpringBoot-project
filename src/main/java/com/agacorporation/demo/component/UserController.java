@@ -130,4 +130,10 @@ public class UserController {
         return "userList";
         // return "redirect:reservationList";
     }
+    @RequestMapping(value="/userDetails.html", method = RequestMethod.GET)
+    public String showUserDetails(Model model, Principal principal){
+
+        model.addAttribute("user", userService.getUserByLogin(principal.getName()));
+        return "userDetails";
+    }
 }
