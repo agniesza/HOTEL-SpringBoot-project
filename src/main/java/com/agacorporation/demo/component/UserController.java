@@ -3,6 +3,7 @@ package com.agacorporation.demo.component;
 import com.agacorporation.demo.component.commands.UserFilter;
 import com.agacorporation.demo.domain.Room;
 import com.agacorporation.demo.domain.User;
+import com.agacorporation.demo.service.EmailService;
 import com.agacorporation.demo.service.SecurityService;
 import com.agacorporation.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private EmailService emailService;
 
     private final UserService userService;
     private final SecurityService securityService;
@@ -52,13 +55,18 @@ public class UserController {
     public String addUser(@ModelAttribute("userForm") User userForm, BindingResult bindingResult){
         userForm.setPassword(passwordEncoder.encode("testowe"));
         userService.save(userForm);
+        emailService.send(userForm.getEmail(), "Witaj w hotelu woods!",
+                "Rejesracja Twojego konta przebiegła pomyślnie. Twój login to:" + userForm.getLogin()+" Hasło do logowania to: testowe. Hasło zostało wygenerowane automatycznie. Proszę zmień hasło na stronie: www.woods.com");
         return "welcome.html";
     }
 
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
         userService.save(userForm);
-         return "welcome.html";
+        emailService.send(userForm.getEmail(), "Witaj w hotelu woods!",
+                "Rejesracja Twojego konta przebiegła pomyślnie. Twój login to:" + userForm.getLogin()+" Zapraszamy na: www.woods.com");
+
+        return "welcome.html";
     }
 
     @PostMapping("/login")
