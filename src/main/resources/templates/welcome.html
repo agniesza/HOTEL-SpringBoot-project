@@ -113,6 +113,10 @@
                         Witaj <span sec:authentication="name"/>!
                     </label>
                 </div>
+                <div class="well">
+                    <a sec:authorize="isAuthenticated()" class="btn btn-success" href="accountDetails.html">Twoje konto</a>
+
+                </div>
 
             </div>
         </div>
