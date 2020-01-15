@@ -47,14 +47,11 @@ public class RoomReservationListController {
         return "redirect:reservationList.html";
     }
     @RequestMapping(value="/reservationList.html", method = {RequestMethod.GET})
-    public String showReservationList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result, Principal principal){
+    public String showReservationList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result){
 
         model.addAttribute("roomReservationListPage", roomReservationService.getAllRoomReservations(search, pageable));
-        System.out.println("fraza "+search.getPhrase());
-        System.out.println("name: "+principal.getName());
 
         return "reservationList";
-        // return "redirect:reservationList";
     }
     @RequestMapping(value="/reservationList.html", method = {RequestMethod.POST})
     public String showReservationList2(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result){
@@ -63,7 +60,13 @@ public class RoomReservationListController {
         return "reservationList";
         // return "redirect:reservationList";
     }
+    @RequestMapping(value="/yourReservationList.html", method = {RequestMethod.GET})
+    public String showYourReservationList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result, Principal principal){
+      search.setPhrase(principal.getName());
+      model.addAttribute("roomReservationListPage", roomReservationService.getUserRoomReservations(search, pageable));
+      return "yourReservationList";
 
+    }
     @RequestMapping(value="/reservationList.html", params = "id", method = RequestMethod.GET)
     public String deleteRoomReservation(long id, HttpServletRequest request){
         roomReservationService.deleteRoomReservation(id);

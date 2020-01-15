@@ -18,6 +18,8 @@ public interface RoomReservationService {
 
     Page<RoomReservation> getAllRoomReservations(RoomReservationFilter search, Pageable pageable);
 
+    Page<RoomReservation> getUserRoomReservations(RoomReservationFilter search, Pageable pageable);
+
     RoomReservation getRoomReservation(Long id);
 
     void deleteRoomReservation(Long id);

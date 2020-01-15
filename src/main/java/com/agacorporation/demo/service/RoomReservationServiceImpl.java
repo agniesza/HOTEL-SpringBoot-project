@@ -45,37 +45,30 @@ public class RoomReservationServiceImpl implements RoomReservationService {
 
     @Override
     public Page<RoomReservation> getAllRoomReservations(RoomReservationFilter search, Pageable pageable)  {
-       // Page page;
-        //page = roomReservationRepository.findAll(pageable);
-
-        //return page;
 
         Page page;
         if(search.isEmpty()){
             page = roomReservationRepository.findAll(pageable);
         }else{
 
-
-/*
-            page = roomReservationRepository.findAll(
-                    Specification.where(
-
-                            RoomReservationsSpecifications.findByPhrase(search.getPhrase())
-                                    .and(
-
-                                    VehicleSpecifications.findByPriceRange(search.getMinPrice(),
-                                            search.getMaxPrice()))
-
-
-                    ), pageable);
-*/
-
             page = roomReservationRepository.findAllRoomReservationsUsingFilter(search.getPhraseLIKE(), pageable);
         }
 
         return page;
     }
+    @Override
+    public Page<RoomReservation> getUserRoomReservations(RoomReservationFilter search, Pageable pageable)  {
 
+        Page page;
+        if(search.isEmpty()){
+            page = roomReservationRepository.findAll(pageable);
+        }else{
+
+            page = roomReservationRepository.findUserRoomReservations(search.getPhraseLIKE(), pageable);
+        }
+
+        return page;
+    }
     @Transactional
     @Override
     public RoomReservation getRoomReservation(Long id) {

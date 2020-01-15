@@ -30,6 +30,13 @@ public interface RoomReservationRepository
     )
     Page<RoomReservation> findAllRoomReservationsUsingFilter(@Param("phrase") String p, Pageable pageable);
 
+    @Query("SELECT v FROM RoomReservation v WHERE " +
+            "(" +
+            ":phrase is null OR :phrase = '' OR "+
+            "v.user.login LIKE (:phrase) )"
+
+    )
+    Page<RoomReservation> findUserRoomReservations(@Param("phrase") String p, Pageable pageable);
 
 
 }
