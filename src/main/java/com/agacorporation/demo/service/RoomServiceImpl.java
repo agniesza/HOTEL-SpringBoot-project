@@ -1,5 +1,6 @@
 package com.agacorporation.demo.service;
 
+import com.agacorporation.demo.component.commands.RoomFilter;
 import com.agacorporation.demo.domain.Room;
 import com.agacorporation.demo.domain.RoomType;
 import com.agacorporation.demo.exceptions.RoomNotFoundException;
@@ -29,9 +30,12 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Page<Room> getAllRooms(Pageable pageable) {
+    public Page<Room> getAllRooms(RoomFilter search, Pageable pageable)  {
+
         Page page;
-        page = roomRepository.findAll(pageable);
+
+            page = roomRepository.findAllRoomsUsingFilter(search.getNumberOfPeople(),search.getReservationStartDate(), search.getReservationEndDate(), pageable);
+
 
         return page;
     }
