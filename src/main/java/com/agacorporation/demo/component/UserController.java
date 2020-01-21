@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Locale;
 
 @Controller
 @RequestMapping
@@ -86,7 +87,7 @@ public class UserController {
     }
 
     @GetMapping({"/", "/welcome"})
-    public String welcome(Model model, User user) {
+    public String welcome(Model model) {
 
         return "welcome.html";
     }
@@ -101,12 +102,25 @@ public class UserController {
         return "userDetails.html";
     }
 
+    @GetMapping({"/accountDetails"})
+        public String showAccountDetails(Model model) {
+        return "accountDetails.html";
+    }
+
     @RequestMapping(value="/reservationList.html", params = {"uid"}, method = RequestMethod.GET)
     public String showUserDetails(Model model, long uid){
         User u = userService.getUser(uid);
         model.addAttribute("user", u);
 
         return "userDetails";
+    }
+    //info about logged in user
+    @RequestMapping(value="/accountDetails.html", method = RequestMethod.GET)
+    public String showLoggedInUAccountDetails(Model model, Principal principal){
+
+        model.addAttribute("user", userService.getUserByLogin(principal.getName()));
+        System.out.println(userService.getUserByLogin(principal.getName()).getLogin());
+        return "accountDetails";
     }
 
     @GetMapping(value="/userList.html", params = {"all"})
@@ -115,7 +129,7 @@ public class UserController {
         return "redirect:userList.html";
     }
     @RequestMapping(value="/userList.html", method = {RequestMethod.GET})
-    public String showUserList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") UserFilter search, BindingResult result){
+    public String showUserList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") UserFilter search){
 
         model.addAttribute("userListPage", userService.getAllUsers(search, pageable));
 
@@ -123,17 +137,25 @@ public class UserController {
     }
 
     @RequestMapping(value="/userList.html", method = {RequestMethod.POST})
-    public String showUserList2(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") UserFilter search, BindingResult result){
+    public String showUserList2(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") UserFilter search){
 
         model.addAttribute("userListPage", userService.getAllUsers(search, pageable));
         System.out.println("fraza "+search.getPhrase());
         return "userList";
         // return "redirect:reservationList";
     }
-    @RequestMapping(value="/userDetails.html", method = RequestMethod.GET)
-    public String showUserDetails(Model model, Principal principal){
 
-        model.addAttribute("user", userService.getUserByLogin(principal.getName()));
-        return "userDetails";
+    @PostMapping("/changePassword.html")
+    public String changePassword(@ModelAttribute("userForm") User userForm, Principal principal) {
+
+
+        return "accountDetails.html";
     }
+    @GetMapping("/changePassword.html")
+    public String changePassword(Model model) {
+        model.addAttribute("userForm", new User());
+
+        return "redirect:/accountDetails.html";
+    }
+
 }

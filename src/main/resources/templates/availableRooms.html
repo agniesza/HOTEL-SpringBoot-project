@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:th2="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel</title>
+    <div th:replace="shared/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="shared/header :: header('reservation')"/>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <label style="color:darkred; margin-top: 20px;" sec:authorize="isAuthenticated()">
+                    Witaj <span sec:authentication="name"/>!
+                    <!--
+                    principal
+                    -->
+                </label>
+            </div>
+
+
+            <div sec:authorize="isAuthenticated()">
+                Twoje role to:
+                <span th:each="role: ${#authentication.getAuthorities()}">
+                            <span th:text="${role}"/>
+                        </span>
+            </div>
+
+        </div>
+
+        <div class="col-sm-8 text-left">
+
+
+            <div th:if="${roomListPage.hasContent() eq false}">
+                <span>Brak pokoi</span>
+            </div>
+            <div th:if="${roomListPage.hasContent() eq true}">
+
+                Dostępne pokoje: [[${roomListPage.totalElements}]]
+
+                   </span>
+            </div>
+            <form th:method="POST" th2:object="${roomReservation}" th2:action="@{/availableRooms.html}">
+                <fieldset>
+
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Piętro</th>
+                    <th>Standard</th>
+                    <th>Łóżka podwójne</th>
+                    <th>Łóżka pojedyncze</th>
+                    <th>Cena za dobę</th>
+
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="room : ${roomListPage.content}">
+                    <td>
+                        <input type="radio" name="room" th:value="${room.id}" th2:field="*{room.id}"/>
+
+                    </td>
+                    <td>
+                           <span > [[${room.floor}]]</span>
+                    </td>
+                    <td style="align-content: center">
+                        <span > [[${room.roomType.roomTypeName}]]</span>
+                    </td>
+                    <td>
+
+                        <span > [[${room.doubleBeds}]]</span>
+                    </td>
+                    <td>
+                        <span > [[${room.singleBeds}]]</span>
+                    </td>
+                    <td>
+                        <span > [[${room.price}]]</span>
+                    </td>
+
+
+
+
+                </tr>
+
+                </tbody>
+            </table>
+
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Rezerwuj"/>
+                </fieldset>
+                </form>
+
+
+        </div>
+    </div>
+    <div class="col-sm-2 sidenav">
+
+
+    </div>
+</div>
+</div>
+
+
+
+
+</body>
+</html>

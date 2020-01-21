@@ -47,21 +47,20 @@ public class RoomReservationListController {
         return "redirect:reservationList.html";
     }
     @RequestMapping(value="/reservationList.html", method = {RequestMethod.GET})
-    public String showReservationList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result){
+    public String showReservationList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search){
 
         model.addAttribute("roomReservationListPage", roomReservationService.getAllRoomReservations(search, pageable));
 
         return "reservationList";
     }
     @RequestMapping(value="/reservationList.html", method = {RequestMethod.POST})
-    public String showReservationList2(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result){
+    public String showReservationList2(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search){
         model.addAttribute("roomReservationListPage", roomReservationService.getAllRoomReservations(search, pageable));
-        System.out.println("fraza "+search.getReservationStartDate());
         return "reservationList";
         // return "redirect:reservationList";
     }
     @RequestMapping(value="/yourReservationList.html", method = {RequestMethod.GET})
-    public String showYourReservationList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, BindingResult result, Principal principal){
+    public String showYourReservationList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, Principal principal){
       search.setPhrase(principal.getName());
       model.addAttribute("roomReservationListPage", roomReservationService.getUserRoomReservations(search, pageable));
       return "yourReservationList";
@@ -75,6 +74,7 @@ public class RoomReservationListController {
         //  return "reservationList.html";
         return "deleteInfo";
     }
+
     private String prepareQueryString(String queryString) {//np., did=20&page=2&size=20
         return queryString.substring(queryString.indexOf("&")+1);//obcinamy parametr did, bo inaczej znowu będzie wywołana metoda deleteVihicle
     }

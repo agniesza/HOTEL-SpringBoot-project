@@ -5,6 +5,7 @@ import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import java.util.Set;
 
 
 @Entity
@@ -44,6 +45,10 @@ public class Room {
     @ManyToOne(fetch = FetchType.EAGER)//EAGER powoduje pobranie obiektu roomtype wraz z obiektem room.
     @JoinColumn(name="types_id", nullable = false)
     private RoomType roomType;
+
+
+    @OneToMany(mappedBy="room")
+    private Set<RoomReservation> roomReservations;
 
     public Room(int maxNumberOfPeople, int roomNumber, int floor, int price, int doubleBeds, int singleBeds, @Valid RoomType roomType) {
         this.maxNumberOfPeople = maxNumberOfPeople;
@@ -112,5 +117,13 @@ public class Room {
 
     public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
+    }
+
+    public Set<RoomReservation> getRoomReservations() {
+        return roomReservations;
+    }
+
+    public void setRoomReservations(Set<RoomReservation> roomReservations) {
+        this.roomReservations = roomReservations;
     }
 }
