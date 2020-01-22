@@ -56,10 +56,19 @@ public class RoomReservationFormController {
                 id.isPresent()?
                         roomReservationService.getRoomReservation(id.get()):
                         new RoomReservation());
-        System.out.println("GET reservationFormUSR");
+
         return "reservationFormUSR.html";
     }
+    @RequestMapping(value="/reservationFormADM.html", method= RequestMethod.GET)
+    public String showFormADM(Model model, Optional<Long> id){
 
+        model.addAttribute("roomReservation",
+                id.isPresent()?
+                        roomReservationService.getRoomReservation(id.get()):
+                        new RoomReservation());
+
+        return "reservationFormADM.html";
+    }
 
     @RequestMapping(value="/availableRooms.html", method= RequestMethod.GET)
     public String showFormUSR2(Model model, @ModelAttribute("roomReservation") RoomReservation v, @ModelAttribute("roomListPage") Page<Room> r){
@@ -82,14 +91,14 @@ public class RoomReservationFormController {
         search.setNumberOfPeople(v.getNumberOfPeople());
         search.setReservationStartDate(v.getReservationStartDate());
         search.setReservationEndDate(v.getReservationEndDate());
-
+/*
 Room rr=roomService.getRoom((long) 1);
 RoomReservation rrr=roomReservationService.getRoomReservation((long) 1);
 
         Set<RoomReservation> roomReservations=rr.getRoomReservations();
         roomReservations.add(rrr);
         rr.setRoomReservations(roomReservations);
-
+*/
 
         v.setUser(userService.getUserByLogin(principal.getName()));
         model.addAttribute("roomListPage", roomService.getAllRooms(search,pageable));
@@ -97,8 +106,36 @@ RoomReservation rrr=roomReservationService.getRoomReservation((long) 1);
         return "redirect:/availableRooms.html";
 
     }
+    @RequestMapping(value="/reservationFormADM.html", method= RequestMethod.POST)
+    public String processFormADM(Model model, @Valid @ModelAttribute("roomReservation") RoomReservation v,  Pageable pageable, RoomFilter search, Principal principal, BindingResult errors){
+
+        if(errors.hasErrors()){
+            System.out.println("error");
+            return "reservationFormADM";
+        }
+User usertemp=userService.getUserByLogin(v.getUser().getLogin());
+        v.setUser(usertemp);
+        search.setNumberOfPeople(v.getNumberOfPeople());
+        search.setReservationStartDate(v.getReservationStartDate());
+        search.setReservationEndDate(v.getReservationEndDate());
+
+/*
+Room rr=roomService.getRoom((long) 1);
+RoomReservation rrr=roomReservationService.getRoomReservation((long) 1);
+
+        Set<RoomReservation> roomReservations=rr.getRoomReservations();
+        roomReservations.add(rrr);
+        rr.setRoomReservations(roomReservations);
+*/
+
+        System.out.println("admin dal nowa rej userowi: " +v.getUser().getLogin());
+        model.addAttribute("roomListPage", roomService.getAllRooms(search,pageable));
+        model.addAttribute("roomReservation", v);
+        return "redirect:/availableRooms.html";
+
+    }
     @RequestMapping(value="/availableRooms.html", method= RequestMethod.POST)
-    public String processFormUSR2(Model model, @Valid @ModelAttribute("roomReservation") RoomReservation v, @ModelAttribute("roomListPage") Page<Room> r){
+    public String processFormUSR2(Model model, @Valid @ModelAttribute("roomReservation") RoomReservation v, @ModelAttribute("roomListPage") Page<Room> r, Principal principal){
         v.setPaid(false);
         v.setVerified(false);
         roomReservationService.saveRoomReservation(v);
@@ -110,8 +147,12 @@ RoomReservation rrr=roomReservationService.getRoomReservation((long) 1);
         roomReservations.add(v);
         rr.setRoomReservations(roomReservations);
 
-
-        return "redirect:yourReservationList.html";
+        if(principal.getName().equals("admin")){
+            return "redirect:reservationList.html";
+        }
+        else {
+            return "redirect:yourReservationList.html";
+        }
 
     }
 

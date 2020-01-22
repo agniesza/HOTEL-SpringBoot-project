@@ -128,7 +128,7 @@
                     </td>
                     <td style="align-content: center">
                         <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/reservationList.html(id=${roomReservation.id})}">Usuń</a>
-                        <a class="btn btn-success">Edytuj</a>
+                        <a class="btn btn-success" th:href="@{/reservationFormADM.html(id=${roomReservation.id})}">Edytuj</a>
                     </td>
                     <td>
                         <span  th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>

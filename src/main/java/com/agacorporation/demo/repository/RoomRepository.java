@@ -18,8 +18,8 @@ SELECT pub.id, pub.revenue
     @Query("SELECT distinct v FROM Room v JOIN v.roomReservations rez WHERE " +
             "(" +
             "v.maxNumberOfPeople >= (:number) AND "+
-            "(( :startd NOT BETWEEN rez.reservationStartDate AND rez.reservationEndDate ) AND "+
-            "( :endd NOT BETWEEN rez.reservationStartDate AND rez.reservationEndDate ))"+
+            "( :startd NOT BETWEEN rez.reservationStartDate AND rez.reservationEndDate ) AND "+
+            "( :endd NOT BETWEEN rez.reservationStartDate AND rez.reservationEndDate )"+
 
     ")"
 
