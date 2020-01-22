@@ -93,6 +93,7 @@
                     <th>Email</th>
 
                     <th>Numer telefonu</th>
+                    <th>Opcje</th>
 
 
 
@@ -119,7 +120,12 @@
                     <td>
                         <span > [[${user.phoneNumber}]]</span>
                     </td>
-
+                    <td>
+                    <td style="align-content: center">
+                        <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/userList.html(id=${user.id})}">Usuń</a>
+                        <a class="btn btn-success" th:href="@{/addUser.html(id=${user.id})}">Edytuj</a>
+                    </td>
+                    </td>
 
 
 

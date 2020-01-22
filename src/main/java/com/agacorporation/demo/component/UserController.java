@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Locale;
@@ -158,4 +159,9 @@ public class UserController {
         return "redirect:/accountDetails.html";
     }
 
+    @RequestMapping(value="/userList.html", params = "id", method = RequestMethod.GET)
+    public String deleteUser(long id, HttpServletRequest request){
+        userService.deleteUser(id);
+        return "deleteInfo";
+    }
 }
