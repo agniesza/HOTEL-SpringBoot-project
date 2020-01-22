@@ -19,15 +19,19 @@
             </div>
         </div>
         <div class="col-sm-8 text-left">
-
             <form th:method="POST" th:object="${roomReservation}" th:action="@{/editReservationFormADM.html}">
                 <fieldset>
-
+                    <p>Rezerwujący<span style="font-weight: bold;"> [[${roomReservation.user.login}]]</span> / <span > [[${roomReservation.user.firstName}]]</span><span > [[${roomReservation.user.lastName}]]</span></p>
+                    <p>Początek rezerwacji:  <span style="font-weight: bold;" th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
+                    Koniec rezerwacji: <span style="font-weight: bold;" th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span></p>
+                    <p>Nr pokoju: <span style="font-weight: bold;">[[${roomReservation.room.roomNumber}]]</span>
+                    Liczba osób: <span style="font-weight: bold;" > [[${roomReservation.numberOfPeople}]]</span></p>
+                    <hr>
                     <div class="form-group">
-                        <label for="checkInDate" class="bmd-label-floating">Check-in:</label>
+                        <label for="checkInDate" class="bmd-label-floating">Początek pobytu:</label>
                         <input id="checkInDate" type="date" th:field="*{checkInDate}"
                                class="form-control" th:classappend="${#fields.hasErrors('checkInDate')}?'is-invalid'"
-                               required="true"/>
+                               />
                         <div class="error text-danger" th:if="${#fields.hasErrors('checkInDate')}">
                             <p th:each="err : ${#fields.errors('checkInDate')}" th:text="${err}"></p>
                         </div>
@@ -36,7 +40,7 @@
                         <label for="checkOutDate" class="bmd-label-floating">Check-out:</label>
                         <input id="checkOutDate" type="date" th:field="*{checkOutDate}"
                                class="form-control" th:classappend="${#fields.hasErrors('checkOutDate')}?'is-invalid'"
-                               required="true"/>
+                               />
                         <div class="error text-danger" th:if="${#fields.hasErrors('checkOutDate')}">
                             <p th:each="err : ${#fields.errors('checkOutDate')}" th:text="${err}"></p>
                         </div>
@@ -45,7 +49,7 @@
                         <label for="endPrice" class="bmd-label-floating">Cena końcowa:</label>
                         <input id="endPrice" type="text" th:field="*{endPrice}"
                                class="form-control" th:classappend="${#fields.hasErrors('endPrice')}?'is-invalid'"
-                               required="true"/>
+                               />
 
                         <div class="error text-danger" th:if="${#fields.hasErrors('endPrice')}">
                             <p th:each="err : ${#fields.errors('endPrice')}" th:text="${err}"></p>
