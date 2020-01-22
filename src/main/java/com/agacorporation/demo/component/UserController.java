@@ -22,9 +22,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Locale;
+import java.util.Optional;
 
 @Controller
 @RequestMapping
+@SessionAttributes("userForm")
 public class UserController {
 
     @Autowired
@@ -51,6 +53,26 @@ public class UserController {
     public String addUser(Model model) {
         model.addAttribute("userForm", new User());
         return "addUser.html";
+    }
+    @Secured("ROLE_ADMIN")
+    @RequestMapping(value="/editUser.html", method= RequestMethod.GET)
+    public String showFormUSR(Model model, Optional<Long> id){
+
+        model.addAttribute("userForm",
+                id.isPresent()?
+                        userService.getUser(id.get()):
+                        new User());
+        System.out.println("login get: "+userService.getUser(id.get()).getLogin());
+        return "editUser.html";
+    }
+    @Secured("ROLE_ADMIN")
+    @PostMapping("/editUser.html")
+    public String editUser(@ModelAttribute("userForm") User userForm){
+        System.out.println("login post: "+userForm.getLogin());
+        userService.save(userForm);
+        emailService.send(userForm.getEmail(), "Zmiana danych",
+                "Dane na Twoim koncie zostały zmienione");
+        return "redirect:userList.html";
     }
     @Secured("ROLE_ADMIN")
     @PostMapping("/addUser")

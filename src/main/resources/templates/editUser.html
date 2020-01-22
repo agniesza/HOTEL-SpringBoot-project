@@ -10,18 +10,18 @@
 </head>
 <body>
 
-<div th:replace="shared/header :: header('addUser')"/>
+<div th:replace="shared/header :: header('editUser')"/>
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
-<p>Rejestracja nowego gościa hotelu</p>
+            <p>Edycja danych użytkownika</p>
         </div>
         <div class="col-sm-8 text-left">
 
 
             <form th:method="POST" th:object="${userForm}">
                 <fieldset>
-                    <h1>Rejestracja użytkownika</h1>
+                    <h1>Edycja użytkownika</h1>
                     <div class="form-group">
                         <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
                             <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
@@ -30,8 +30,7 @@
 
                     <div class="form-group">
                         Login:
-                        <input type="text" th:field="*{login}"
-                               class="form-control" placeholder="" required="true" autofocus="true"/>
+                        <span style="font-weight: bold;"> [[${userForm.login}]]</span>
                     </div>
 
                     <div class="form-group">
@@ -58,15 +57,13 @@
                                class="form-control" placeholder="" required="true" autofocus="true"/>
                     </div>
 
-                    <div class="form-group">
-                        Hasło do logowania zostanie przesłane na podanego maila.
-                        </div>
+
 
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
 
 
-                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Zarejestruj użytkowanika"/>
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Zapisz zmiany"/>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
                         </div>
