@@ -69,11 +69,19 @@ public class RoomReservationFormController {
 
         return "reservationFormADM.html";
     }
+    @RequestMapping(value="/editReservationFormADM.html", method= RequestMethod.GET)
+    public String showEditFormADM(Model model, Optional<Long> id){
 
+        model.addAttribute("roomReservation",
+                id.isPresent()?
+                        roomReservationService.getRoomReservation(id.get()):
+                        new RoomReservation());
+
+        return "editReservationFormADM.html";
+    }
     @RequestMapping(value="/availableRooms.html", method= RequestMethod.GET)
     public String showFormUSR2(Model model, @ModelAttribute("roomReservation") RoomReservation v, @ModelAttribute("roomListPage") Page<Room> r){
-        System.out.println("availableRooms");
-        System.out.println(v.getNumberOfPeople());
+
         model.addAttribute("roomListPage", r);
         model.addAttribute("roomReservation", v);
 
@@ -84,21 +92,12 @@ public class RoomReservationFormController {
     public String processFormUSR(Model model, @Valid @ModelAttribute("roomReservation") RoomReservation v,  Pageable pageable, RoomFilter search, Principal principal, BindingResult errors){
 
        if(errors.hasErrors()){
-           System.out.println("error");
             return "reservationFormUSR";
         }
 
         search.setNumberOfPeople(v.getNumberOfPeople());
         search.setReservationStartDate(v.getReservationStartDate());
         search.setReservationEndDate(v.getReservationEndDate());
-/*
-Room rr=roomService.getRoom((long) 1);
-RoomReservation rrr=roomReservationService.getRoomReservation((long) 1);
-
-        Set<RoomReservation> roomReservations=rr.getRoomReservations();
-        roomReservations.add(rrr);
-        rr.setRoomReservations(roomReservations);
-*/
 
         v.setUser(userService.getUserByLogin(principal.getName()));
         model.addAttribute("roomListPage", roomService.getAllRooms(search,pageable));
@@ -110,7 +109,7 @@ RoomReservation rrr=roomReservationService.getRoomReservation((long) 1);
     public String processFormADM(Model model, @Valid @ModelAttribute("roomReservation") RoomReservation v,  Pageable pageable, RoomFilter search, Principal principal, BindingResult errors){
 
         if(errors.hasErrors()){
-            System.out.println("error");
+
             return "reservationFormADM";
         }
 User usertemp=userService.getUserByLogin(v.getUser().getLogin());
@@ -128,14 +127,21 @@ RoomReservation rrr=roomReservationService.getRoomReservation((long) 1);
         rr.setRoomReservations(roomReservations);
 */
 
-        System.out.println("admin dal nowa rej userowi: " +v.getUser().getLogin());
         model.addAttribute("roomListPage", roomService.getAllRooms(search,pageable));
         model.addAttribute("roomReservation", v);
         return "redirect:/availableRooms.html";
 
     }
+    @RequestMapping(value="/editReservationFormADM.html", method= RequestMethod.POST)
+    public String processEditFormADM(@Valid @ModelAttribute("roomReservation") RoomReservation v, BindingResult errors){
+
+        roomReservationService.saveRoomReservation(v);
+        return "redirect:/reservationList.html";
+
+    }
+
     @RequestMapping(value="/availableRooms.html", method= RequestMethod.POST)
-    public String processFormUSR2(Model model, @Valid @ModelAttribute("roomReservation") RoomReservation v, @ModelAttribute("roomListPage") Page<Room> r, Principal principal){
+    public String processFormUSR2(@Valid @ModelAttribute("roomReservation") RoomReservation v, @ModelAttribute("roomListPage") Page<Room> r, Principal principal){
         v.setPaid(false);
         v.setVerified(false);
         roomReservationService.saveRoomReservation(v);
@@ -167,6 +173,8 @@ RoomReservation rrr=roomReservationService.getRoomReservation((long) 1);
         CustomDateEditor dateEditor = new CustomDateEditor(dateFormat, false);
         binder.registerCustomEditor(Date.class, "reservationStartDate", dateEditor);
         binder.registerCustomEditor(Date.class, "reservationEndDate", dateEditor);
+        binder.registerCustomEditor(Date.class, "checkInDate", dateEditor);
+        binder.registerCustomEditor(Date.class, "checkOutDate", dateEditor);
 
         DecimalFormat numberFormat = new DecimalFormat("#0.00");
         numberFormat.setMaximumFractionDigits(2);
