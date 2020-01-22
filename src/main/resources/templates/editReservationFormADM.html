@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel</title>
+    <div th:replace="shared/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="shared/header :: header('editReservationFormADM')"/>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <div sec:authorize="isAuthenticated()">
+                <a>Edycja rezerwacji</a>
+            </div>
+        </div>
+        <div class="col-sm-8 text-left">
+
+            <form th:method="POST" th:object="${roomReservation}" th:action="@{/editReservationFormADM.html}">
+                <fieldset>
+
+                    <div class="form-group">
+                        <label for="checkInDate" class="bmd-label-floating">Check-in:</label>
+                        <input id="checkInDate" type="date" th:field="*{checkInDate}"
+                               class="form-control" th:classappend="${#fields.hasErrors('checkInDate')}?'is-invalid'"
+                               required="true"/>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('checkInDate')}">
+                            <p th:each="err : ${#fields.errors('checkInDate')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkOutDate" class="bmd-label-floating">Check-out:</label>
+                        <input id="checkOutDate" type="date" th:field="*{checkOutDate}"
+                               class="form-control" th:classappend="${#fields.hasErrors('checkOutDate')}?'is-invalid'"
+                               required="true"/>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('checkOutDate')}">
+                            <p th:each="err : ${#fields.errors('checkOutDate')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="endPrice" class="bmd-label-floating">Cena końcowa:</label>
+                        <input id="endPrice" type="text" th:field="*{endPrice}"
+                               class="form-control" th:classappend="${#fields.hasErrors('endPrice')}?'is-invalid'"
+                               required="true"/>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('endPrice')}">
+                            <p th:each="err : ${#fields.errors('endPrice')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+
+                        <div class="form-group">
+                            <label class="bmd-label-floating">
+                                <input type="checkbox" th:field="*{paid}"/>
+                                Opłacony?
+                            </label>
+                        </div>
+                    <div class="form-group">
+                        <label class="bmd-label-floating">
+                            <input type="checkbox" th:field="*{verified}"/>
+                            Zweryfikowany?
+                        </label>
+                    </div>
+
+
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Zapisz zmiany"/>
+
+                </fieldset>
+            </form>
+
+
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <label style="color:darkred; margin-top: 20px;" sec:authorize="isAuthenticated()">
+                    Witaj <span sec:authentication="name"/>!
+                </label>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
