@@ -15,7 +15,7 @@
     <div class="row content">
         <div class="col-sm-2 sidenav">
             <div sec:authorize="isAuthenticated()">
-                <a>Rezerwacja pokoju</a>
+                <p>Rezerwacja pokoju</p>
             </div>
         </div>
         <div class="col-sm-8 text-left">
@@ -65,7 +65,10 @@
                     Witaj <span sec:authentication="name"/>!
                 </label>
             </div>
+            <div class="well">
+                <a sec:authorize="isAuthenticated()" class="btn btn-success" href="accountDetails.html">Twoje konto</a>
 
+            </div>
         </div>
     </div>
 </div>

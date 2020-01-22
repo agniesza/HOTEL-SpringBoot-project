@@ -14,8 +14,18 @@
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
-            <div sec:authorize="isAuthenticated()">
+            <p></p>
+            <div sec:authorize="hasRole('ADMIN')">
+                <a class="btn btn-success" href="/addUser">Dodaj użytkownika</a>
+            </div>
+            <br>
+            <div sec:authorize="hasRole('ADMIN')">
+                <a class="btn btn-success" href="reservationFormADM.html">Dodaj rezerwację</a>
+            </div>
+
+            <div sec:authorize="hasRole('USER')">
                 <a class="btn btn-success" href="reservationFormUSR.html">Zarezerwuj pokój</a>
+
             </div>
         </div>
         <div class="col-sm-8 text-left">
@@ -38,7 +48,10 @@
                     Witaj <span sec:authentication="name"/>!
                 </label>
             </div>
+            <div class="well">
+                <a sec:authorize="isAuthenticated()" class="btn btn-success" href="accountDetails.html">Twoje konto</a>
 
+            </div>
         </div>
     </div>
 </div>

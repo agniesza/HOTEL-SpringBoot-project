@@ -17,8 +17,9 @@
             <div class="col-sm-2 sidenav">
                 <p></p>
                 <div sec:authorize="hasRole('ADMIN')">
-                    <a class="btn btn-success" href="/addUser">Zarejestruj nowego gościa hotelu</a>
+                    <a class="btn btn-success" href="/addUser">Dodaj użytkownika</a>
                 </div>
+                <br>
                 <div sec:authorize="hasRole('ADMIN')">
                     <a class="btn btn-success" href="reservationFormADM.html">Dodaj rezerwację</a>
                 </div>
@@ -27,7 +28,7 @@
                     <a class="btn btn-success" href="reservationFormUSR.html">Zarezerwuj pokój</a>
 
                 </div>
-
+<!--
                 <div sec:authorize="isAuthenticated()">
 
                     Twoje role to:
@@ -35,6 +36,7 @@
                             <span th:text="${role}"/>
                         </span>
                 </div>
+-->
             </div>
             <div class="col-sm-8 text-left">
 
