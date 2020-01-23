@@ -66,7 +66,13 @@
 
                 </fieldset>
             </form>
-
+            <br>
+            <div sec:authorize="hasRole('ADMIN')">
+                <a class="btn btn-lg btn-block" href="reservationList.html">Anuluj</a>
+            </div>
+            <div sec:authorize="hasRole('USER')">
+                <a class="btn btn-lg  btn-block" href="yourReservationList.html">Anuluj</a>
+            </div>
 
         </div>
         <div class="col-sm-2 sidenav">
