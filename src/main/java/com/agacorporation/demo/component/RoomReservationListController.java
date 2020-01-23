@@ -59,13 +59,15 @@ public class RoomReservationListController {
         return "reservationList";
         // return "redirect:reservationList";
     }
+
     @RequestMapping(value="/yourReservationList.html", method = {RequestMethod.GET})
     public String showYourReservationList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search, Principal principal){
       search.setPhrase(principal.getName());
       model.addAttribute("roomReservationListPage", roomReservationService.getUserRoomReservations(search, pageable));
       return "yourReservationList";
-
     }
+
+
     @RequestMapping(value="/reservationList.html", params = "id", method = RequestMethod.GET)
     public String deleteRoomReservation(long id, HttpServletRequest request){
         roomReservationService.deleteRoomReservation(id);

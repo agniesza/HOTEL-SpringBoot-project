@@ -27,4 +27,9 @@ SELECT pub.id, pub.revenue
     )
     Page<Room> findAllRoomsUsingFilter(@Param("number") int p, @Param("startd") Date s, @Param("endd") Date e, Pageable pageable);
 
+    @Query("SELECT distinct v FROM Room v "
+
+  )
+    Page<Room> findAllRooms(Pageable pageable);
+
 }

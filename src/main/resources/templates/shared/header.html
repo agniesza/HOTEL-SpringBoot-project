@@ -26,6 +26,7 @@
                 <li class="nav-item" sec:authorize="isAnonymous()" ><a class="nav-link"  th:classappend="${pageName eq 'registration'}?'active'" href="/registration">Rejestracja</a></li>
                 <li class="nav-item">  <a class="nav-link" th:classappend="${pageName eq 'contact'}?'active'" th:href="@{/contact}" >Kontakt</a></li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')" ><a class="nav-link"  th:classappend="${pageName eq 'reservationList'}?'active'" th:href="@{/reservationList.html(all)}">Rezerwacje</a></li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')" ><a class="nav-link"  th:classappend="${pageName eq 'roomList'}?'active'" th:href="@{/roomList.html}">Pokoje</a></li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" ><a class="nav-link"  th:classappend="${pageName eq 'yourReservationList'}?'active'" th:href="@{/yourReservationList.html}">Twoje rezerwacje</a></li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')" ><a class="nav-link"  th:classappend="${pageName eq 'userList'}?'active'" th:href="@{/userList.html(all)}">Użytkownicy</a></li>
 

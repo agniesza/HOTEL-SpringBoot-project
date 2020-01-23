@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel</title>
+    <div th:replace="shared/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="shared/header :: header('roomList')"/>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+
+            <p></p>
+            <div sec:authorize="hasRole('ADMIN')">
+                <a class="btn btn-success" href="/addUser">Dodaj użytkownika</a>
+            </div>
+            <br>
+            <div sec:authorize="hasRole('ADMIN')">
+                <a class="btn btn-success" href="reservationFormADM.html">Dodaj rezerwację</a>
+            </div>
+
+            <div sec:authorize="hasRole('USER')">
+                <a class="btn btn-success" href="reservationFormUSR.html">Zarezerwuj pokój</a>
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-8 text-left">
+
+
+            <div th:if="${roomListPage.hasContent() eq false}">
+                <span>Brak pokoi</span>
+            </div>
+            <div th:if="${roomListPage.hasContent() eq true}">
+                Baza zawiera [[${roomListPage.totalElements}]] pokoi
+
+
+            </div>
+
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Numer</th>
+                    <th>Piętro</th>
+                    <th>Cena za noc</th>
+                    <th>Standard</th>
+                    <th>Max liczba osób</th>
+                    <th>Łóżka podwójne</th>
+                    <th>Łóżka pojedyncze</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="room : ${roomListPage.content}">
+
+                    <td>
+                        [[${room.roomNumber}]]</a>
+
+                    </td>
+                    <td>
+                        <span > [[${room.floor}]]</span>
+                        </a>
+
+                    </td>
+
+                    <td>
+                        <span > [[${room.price}]]</span>
+                    </td>
+                    <td>
+                        <span > [[${room.roomType.roomTypeName}]]</span>
+                    </td>
+                    <td>
+                        <span > [[${room.maxNumberOfPeople}]]</span>
+                    </td>
+                    <td>
+                        <span > [[${room.doubleBeds}]]</span>
+                    </td>
+                    <td>
+                        <span > [[${room.singleBeds}]]</span>
+                    </td>
+
+
+
+                </tr>
+
+                </tbody>
+            </table>
+            <div th:replace="shared/pagination :: pager(roomList.html, ${roomListPage})"></div>
+
+
+
+
+
+        </div>
+    </div>
+    <div class="col-sm-2 sidenav">
+
+        <div class="well">
+            <label style="color:darkred; margin-top: 20px;" sec:authorize="isAuthenticated()">
+                Witaj <span sec:authentication="name"/>!
+            </label>
+        </div>
+        <div class="well">
+            <a sec:authorize="isAuthenticated()" class="btn btn-success" href="accountDetails.html">Twoje konto</a>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+</body>
+</html>

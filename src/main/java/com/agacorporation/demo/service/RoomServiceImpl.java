@@ -41,6 +41,15 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public Page<Room> getAllRooms2(Pageable pageable) {
+        Page page;
+
+        page = roomRepository.findAllRooms(pageable);
+return page;
+    }
+
+
+    @Override
     public Room getRoom(Long id) {
         Optional<Room> optionalRoom = roomRepository.findById(id);
         Room room = optionalRoom.orElseThrow(()->new RoomNotFoundException(id));
