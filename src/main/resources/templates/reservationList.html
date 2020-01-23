@@ -119,8 +119,20 @@
 
                     </td>
                     <td style="align-content: center">
-                        <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/reservationList.html(id=${roomReservation.id})}">Usuń</a>
-                        <a class="btn btn-success" th:href="@{/editReservationFormADM.html(id=${roomReservation.id})}">Edytuj</a>
+                        <span th:if="${roomReservation.reservationStartDate.after(#dates.createNow())}">
+                        <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/reservationList.html(id=${roomReservation.id})}">Anuluj rezerwację</a>
+                       </span>
+                        <span th:if="${roomReservation.reservationEndDate.before(#dates.createNow())}">
+                        <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/reservationList.html(id=${roomReservation.id})}">Usuń </a>
+                            <p>Nieaktualna rezerwacja</p>
+                       </span>
+                        <span th:if="${roomReservation.reservationEndDate.after(#dates.createNow()) and roomReservation.reservationStartDate.before(#dates.createNow())}">
+                            Rezerwacja trwa
+                            <a class="btn btn-success" th:href="@{/editReservationFormADM.html(id=${roomReservation.id})}">Modyfikuj rezerwację</a>
+                        </span>
+                        <span th:if="${roomReservation.reservationStartDate.after(#dates.createNow())}">
+                        <a class="btn btn-success" th:href="@{/editReservationFormADM.html(id=${roomReservation.id})}">Modyfikuj rezerwację</a>
+                        </span>
                     </td>
                     <td>
                         <span  th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
